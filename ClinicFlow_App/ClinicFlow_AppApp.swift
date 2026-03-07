@@ -2,7 +2,7 @@
 //  ClinicFlow_AppApp.swift
 //  ClinicFlow_App
 //
-//  Created by Sanduni on 2026-03-07.
+//  Created by Shazna on 2026-03-07.
 //
 
 import SwiftUI
