@@ -1,20 +1,24 @@
-// SplashScreen.swift
-// Clinic Flow – Landing / Splash screen.
-// Corresponds to: LandingPage.tsx  (SplashScreen export)
-
+//
+//  SplashScreen.swift
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//
 import SwiftUI
 
 struct SplashScreen: View {
-    var body: some View {
-        // Outer canvas — mirrors the grey `#e5e5ea` page background
-        ZStack {
-            Color(hex: "#e5e5ea").ignoresSafeArea()
+    var onTap: () -> Void
 
-            PhoneShell {
-                CFStatusBar()
-                SplashContent()
-                CFHomeIndicator()
-            }
+    var body: some View {
+        // Full screen splash content
+        ZStack {
+            // base white background — ensures no grey peeks through
+            Color.white.ignoresSafeArea()
+
+            SplashContent()
+        }
+        .onTapGesture {
+            onTap()
         }
     }
 }
@@ -27,6 +31,7 @@ private struct SplashContent: View {
             ZStack(alignment: .bottom) {
 
                 Color.white
+                    .ignoresSafeArea()
 
                 // ── Diagonal wave (bottom-right fill) ─────────────────────────
                 // Exactly mirrors SVG:
@@ -70,7 +75,8 @@ private struct SplashContent: View {
                         .foregroundColor(.cfBlueDark)
                 }
                 // Mirrors `marginBottom: "110px"` — lift the block above the wave
-                .padding(.bottom, 110)
+                // increase padding so text rises further and no longer overlaps gradient
+                .padding(.bottom, 140)
             }
         }
     }
@@ -101,5 +107,5 @@ private struct DiagonalWave: Shape {
 // ─── MARK: Preview ────────────────────────────────────────────────────────────
 
 #Preview {
-    SplashScreen()
+    SplashScreen(onTap: {})
 }

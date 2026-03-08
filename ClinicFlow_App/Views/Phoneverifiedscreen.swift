@@ -1,9 +1,9 @@
-// PhoneVerifiedScreen.swift
-// Clinic Flow – Phone number verified success screen.
-// Corresponds to: Verified.tsx  (PhoneVerifiedScreen export)
 //
-// Usage:
-//   PhoneVerifiedScreen(onContinue: { /* navigate to home */ })
+// PhoneVerifiedScreen.swift
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//
 
 import SwiftUI
 
@@ -12,12 +12,10 @@ struct PhoneVerifiedScreen: View {
 
     var body: some View {
         ZStack {
-            Color(hex: "#1a1a1a").ignoresSafeArea()
+            Color.white.ignoresSafeArea()
 
-            PhoneShell {
-                CFStatusBar()
+            VStack(spacing: 0) {
                 VerifiedContent(onContinue: onContinue)
-                CFHomeIndicator()
             }
         }
     }
@@ -139,3 +137,4 @@ private struct BouncingDots: View {
 #Preview {
     PhoneVerifiedScreen()
 }
+
