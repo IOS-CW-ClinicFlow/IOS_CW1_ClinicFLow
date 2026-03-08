@@ -1,10 +1,9 @@
-// OTPVerificationScreen.swift
-// Clinic Flow – Phone Verification screen (enter 6-digit OTP).
-// Corresponds to: verifyOTP.tsx  (PhoneVerificationScreen export)
 //
-// Usage:
-//   OTPVerificationScreen(onVerified: { /* go to verified screen */ }, onBack: { /* go back */ })
-
+// OTPVerificationScreen.swift
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//
 import SwiftUI
 import Combine
 
@@ -14,12 +13,10 @@ struct OTPVerificationScreen: View {
 
     var body: some View {
         ZStack {
-            Color(hex: "#1a1a1a").ignoresSafeArea()
+            Color.white.ignoresSafeArea()
 
-            PhoneShell {
-                CFStatusBar()
+            VStack(spacing: 0) {
                 OTPContent(onVerified: onVerified, onBack: onBack)
-                CFHomeIndicator()
             }
         }
     }
@@ -39,66 +36,57 @@ private struct OTPContent: View {
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
-        VStack(spacing: 0) {
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 0) {
 
-            // ── Nav bar ───────────────────────────────────────────────────────
-            HStack(spacing: 0) {
-                Button(action: onBack) {
-                    BackArrowIcon()
-                        .padding(8)
-                        .contentShape(Circle())
+                // ── Back Button ───────────────────────────────────────────────
+                BackButton(action: onBack)
+
+                // ── Title ─────────────────────────────────────────────────────
+                Text("Phone Verification")
+                    .font(.cfDisplay(size: 22, weight: .bold))
+                    .foregroundColor(.cfText)
+                    .kerning(-0.4)
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 16)
+
+                // ── Subtitle ──────────────────────────────────────────────────────
+                Text("Enter 6 digit verification code sent to your phone number")
+                    .font(.cfDisplay(size: 15))
+                    .foregroundColor(Color(hex: "#555555"))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+                    .frame(maxWidth: 280)
+                    .padding(.bottom, 40)
+
+                // ── OTP Boxes ─────────────────────────────────────────────────────
+                HStack(spacing: 10) {
+                    ForEach(0..<6, id: \.self) { i in
+                        OTPBox(
+                            digit:     $otp[i],
+                            isFocused: focusedIndex == i,
+                            onCommit: { handleChange(index: i) }
+                        )
+                        .focused($focusedIndex, equals: i)
+                    }
+                }
+                .padding(.bottom, 36)
+
+                // ── Resend Button ─────────────────────────────────────────────────
+                Button(action: handleResend) {
+                    Text(resendTimer > 0 ? "Resend Code (\(resendTimer)s)" : "Resend Code")
+                        .font(.cfDisplay(size: 15, weight: .semibold))
+                        .foregroundColor(resendTimer > 0 ? Color(hex: "#aaaaaa") : Color.cfBlue)
+                        .animation(.easeInOut(duration: 0.2), value: resendTimer)
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
                 }
                 .buttonStyle(.plain)
-                .padding(.leading, 20)
-
-                Spacer()
-
-                Text("Phone Verification")
-                    .font(.cfDisplay(size: 17, weight: .semibold))
-                    .foregroundColor(.cfText)
-                    .kerning(-0.3)
-
-                Spacer()
-
-                // Balance the back button width so title stays centred
-                Color.clear.frame(width: 44)
+                .disabled(resendTimer > 0)
             }
+            .padding(.horizontal, 28)
             .padding(.top, 16)
-            .padding(.bottom, 40)
-
-            // ── Subtitle ──────────────────────────────────────────────────────
-            Text("Enter 6 digit verification code sent to your phone number")
-                .font(.cfDisplay(size: 15))
-                .foregroundColor(Color(hex: "#555555"))
-                .multilineTextAlignment(.center)
-                .lineSpacing(4)
-                .frame(maxWidth: 260)
-                .padding(.bottom, 40)
-
-            // ── OTP Boxes ─────────────────────────────────────────────────────
-            HStack(spacing: 10) {
-                ForEach(0..<6, id: \.self) { i in
-                    OTPBox(
-                        digit:     $otp[i],
-                        isFocused: focusedIndex == i,
-                        onCommit: { handleChange(index: i) }
-                    )
-                    .focused($focusedIndex, equals: i)
-                }
-            }
-            .padding(.bottom, 36)
-
-            // ── Resend Button ─────────────────────────────────────────────────
-            Button(action: handleResend) {
-                Text(resendTimer > 0 ? "Resend Code (\(resendTimer)s)" : "Resend Code")
-                    .font(.cfDisplay(size: 15, weight: .semibold))
-                    .foregroundColor(resendTimer > 0 ? Color(hex: "#aaaaaa") : Color.cfBlue)
-                    .animation(.easeInOut(duration: 0.2), value: resendTimer)
-            }
-            .buttonStyle(.plain)
-            .disabled(resendTimer > 0)
-
-            Spacer()
         }
         .onReceive(timer) { _ in
             if resendTimer > 0 { resendTimer -= 1 }

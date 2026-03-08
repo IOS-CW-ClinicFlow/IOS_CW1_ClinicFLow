@@ -1,10 +1,10 @@
+//
 // ContentView.swift
-// ClinicFlow_App
-// Root navigation controller — wires all screens together.
-
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//
 import SwiftUI
-
-// ─── MARK: App Screens ────────────────────────────────────────────────────────
 
 enum AppScreen {
     case splash
@@ -12,33 +12,35 @@ enum AppScreen {
     case signup
     case otpVerification
     case phoneVerified
+    case home
+    case services
 }
-
-// ─── MARK: Content View ───────────────────────────────────────────────────────
 
 struct ContentView: View {
     @State private var currentScreen: AppScreen = .splash
+    @State private var servicesTab: ServicesTab = .doctor
 
     var body: some View {
         ZStack {
             switch currentScreen {
 
             case .splash:
-                SplashScreen()
-                    .onAppear {
-                        // Auto-navigate to login after 2.5 s
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                currentScreen = .login
-                            }
-                        }
+                SplashScreen(onTap: {
+                    withAnimation(.easeInOut(duration: 0.4)) {
+                        currentScreen = .login
                     }
+                })
 
             case .login:
                 LoginScreen(
                     onSendOTP: {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             currentScreen = .otpVerification
+                        }
+                    },
+                    onSignup: {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            currentScreen = .signup
                         }
                     }
                 )
@@ -75,19 +77,79 @@ struct ContentView: View {
                 PhoneVerifiedScreen(
                     onContinue: {
                         withAnimation(.easeInOut(duration: 0.3)) {
-                            // TODO: Navigate to HomeScreen once built
-                            currentScreen = .login
+                            currentScreen = .home
                         }
                     }
                 )
+
+            case .home:
+                HomeScreen(
+                    onNotificationTap: {},
+                    onSeeAllDoctors: {
+                        navigateToServices(tab: .doctor)
+                    },
+                    onSeeAllLabs: {
+                        navigateToServices(tab: .lab)
+                    },
+                    onDoctorTap: { _ in
+                        navigateToServices(tab: .doctor)
+                    },
+                    onLabTap: { _ in
+                        navigateToServices(tab: .lab)
+                    },
+                    onCategoryTap: { category in
+                        switch category {
+                        case .emergency: navigateToServices(tab: .doctor)
+                        case .doctors:   navigateToServices(tab: .doctor)
+                        case .labs:      navigateToServices(tab: .lab)
+                        case .pharmacy:  navigateToServices(tab: .pharmacy)
+                        }
+                    }
+                )
+                .withBottomNav(current: .home) { tab in
+                    navigate(to: tab)
+                }
+
+            case .services:
+                ServicesScreen(
+                    initialTab: servicesTab,
+                    onBack: {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            currentScreen = .home
+                        }
+                    }
+                )
+                .withBottomNav(current: .services) { tab in
+                    navigate(to: tab)
+                }
             }
         }
-        // Smooth cross-fade between all screen transitions
         .animation(.easeInOut(duration: 0.35), value: currentScreen)
     }
-}
 
-// ─── MARK: Preview ────────────────────────────────────────────────────────────
+    // ── Navigate to services with a specific tab ─────────────────────────────
+
+    private func navigateToServices(tab: ServicesTab) {
+        servicesTab = tab
+        withAnimation(.easeInOut(duration: 0.3)) {
+            currentScreen = .services
+        }
+    }
+
+    // ── Tab → screen mapping ───────────────────────────────────────────────
+
+    private func navigate(to tab: String) {
+        let target: AppScreen = switch tab {
+        case "Home":     .home
+        case "Services": .services
+        default:         currentScreen   // other tabs not built yet
+        }
+        guard target != currentScreen else { return }
+        withAnimation(.easeInOut(duration: 0.3)) {
+            currentScreen = target
+        }
+    }
+}
 
 #Preview {
     ContentView()
