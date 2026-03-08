@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FE4E965A2F5BFE8200CBF4F4 /* ClinicFlow_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinicFlow_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE4E96672F5BFE8600CBF4F4 /* ClinicFlow_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicFlow_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE4E96712F5BFE8600CBF4F4 /* ClinicFlow_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicFlow_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE4E965A2F5BFE8200CBF4F4 /* ClinicFlow_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ClinicFlow_App.app; path = "/Users/COBSCCOMP24.2P-019/ios/cobsccomp24.2p-019/IOS_CW1_ClinicFLow/build/Debug-iphoneos/ClinicFlow_App.app"; sourceTree = "<absolute>"; };
+		FE4E96672F5BFE8600CBF4F4 /* ClinicFlow_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ClinicFlow_AppTests.xctest; path = "/Users/COBSCCOMP24.2P-019/ios/cobsccomp24.2p-019/IOS_CW1_ClinicFLow/build/Debug-iphoneos/ClinicFlow_App.app/PlugIns/ClinicFlow_AppTests.xctest"; sourceTree = "<absolute>"; };
+		FE4E96712F5BFE8600CBF4F4 /* ClinicFlow_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ClinicFlow_AppUITests.xctest; path = "/Users/COBSCCOMP24.2P-019/ios/cobsccomp24.2p-019/IOS_CW1_ClinicFLow/build/Debug-iphoneos/ClinicFlow_AppUITests-Runner.app/PlugIns/ClinicFlow_AppUITests.xctest"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -78,18 +78,7 @@
 				FE4E965C2F5BFE8200CBF4F4 /* ClinicFlow_App */,
 				FE4E966A2F5BFE8600CBF4F4 /* ClinicFlow_AppTests */,
 				FE4E96742F5BFE8600CBF4F4 /* ClinicFlow_AppUITests */,
-				FE4E965B2F5BFE8200CBF4F4 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		FE4E965B2F5BFE8200CBF4F4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FE4E965A2F5BFE8200CBF4F4 /* ClinicFlow_App.app */,
-				FE4E96672F5BFE8600CBF4F4 /* ClinicFlow_AppTests.xctest */,
-				FE4E96712F5BFE8600CBF4F4 /* ClinicFlow_AppUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +185,7 @@
 			mainGroup = FE4E96512F5BFE8200CBF4F4;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = FE4E965B2F5BFE8200CBF4F4 /* Products */;
+			productRefGroup = FE4E96512F5BFE8200CBF4F4;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

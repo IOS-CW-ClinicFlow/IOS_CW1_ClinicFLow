@@ -1,23 +1,22 @@
-// LoginScreen.swift
-// Clinic Flow – Login with OTP flow.
-// Corresponds to: LoginScreen.tsx
 //
-// Usage:
-//   LoginScreen(onSendOTP: { /* navigate to PhoneVerificationScreen */ })
+// LoginScreen.swift
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//
 
 import SwiftUI
 
 struct LoginScreen: View {
     var onSendOTP: () -> Void
+    var onSignup: () -> Void
 
     var body: some View {
         ZStack {
-            Color(hex: "#1a1a1a").ignoresSafeArea()
+            Color.white.ignoresSafeArea()
 
-            PhoneShell {
-                CFStatusBar()
-                LoginContent(onSendOTP: onSendOTP)
-                CFHomeIndicator()
+            VStack(spacing: 0) {
+                LoginContent(onSendOTP: onSendOTP, onSignup: onSignup)
             }
         }
     }
@@ -27,8 +26,10 @@ struct LoginScreen: View {
 
 private struct LoginContent: View {
     var onSendOTP: () -> Void
+    var onSignup: () -> Void
 
-    @State private var phone: String = "(+94 ) 76 0012 123"
+    @State private var phone: String = MockUser.loginPhone
+    @State private var phoneError: String? = nil
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -48,11 +49,18 @@ private struct LoginContent: View {
                     .padding(.bottom, 28)
 
                 // ── Phone Input ───────────────────────────────────────────────
-                CFPhoneInputField(text: $phone)
+                CFPhoneInputField(text: $phone, error: phoneError)
+                    .onChange(of: phone) { _ in
+                        if phoneError != nil { phoneError = nil }
+                    }
 
                 // ── Send OTP Button ───────────────────────────────────────────
-                SendOTPButton(action: onSendOTP)
-                    .padding(.top, 24)
+                SendOTPButton(action: {
+                    if validatePhone() {
+                        onSendOTP()
+                    }
+                })
+                .padding(.top, 24)
 
                 // ── Divider ───────────────────────────────────────────────────
                 DividerWithLabel(label: "Or Sign In with")
@@ -60,18 +68,20 @@ private struct LoginContent: View {
 
                 // ── Social Buttons ────────────────────────────────────────────
                 HStack(spacing: 16) {
-                    SocialButton(imageName: "google_logo")
-                    SocialButton(imageName: "apple_logo")
+                    SocialButton(platform: .google)
+                    SocialButton(platform: .apple)
                 }
 
                 // ── Create Account ────────────────────────────────────────────
-                HStack(spacing: 4) {
-                    Text("Don't have account?")
-                        .font(.cfDisplay(size: 13.5))
-                        .foregroundColor(Color(hex: "#8e8e93"))
-                    Text("Create Account")
-                        .font(.cfDisplay(size: 13.5, weight: .semibold))
-                        .foregroundColor(.cfBlue)
+                Button(action: onSignup) {
+                    HStack(spacing: 4) {
+                        Text("Don't have account?")
+                            .font(.cfDisplay(size: 13.5))
+                            .foregroundColor(Color(hex: "#8e8e93"))
+                        Text("Create Account")
+                            .font(.cfDisplay(size: 13.5, weight: .semibold))
+                            .foregroundColor(.cfBlue)
+                    }
                 }
                 .padding(.top, 28)
             }
@@ -79,54 +89,23 @@ private struct LoginContent: View {
             .padding(.top, 16)
         }
     }
-}
 
-// ─── MARK: Phone Input Field ──────────────────────────────────────────────────
-// Mimics the react-phone-input-2 field styling.
-
-private struct CFPhoneInputField: View {
-    @Binding var text: String
-    @FocusState private var focused: Bool
-
-    var body: some View {
-        HStack(spacing: 0) {
-            // Country flag + code pill
-            HStack(spacing: 6) {
-                Text("🇱🇰")
-                    .font(.system(size: 18))
-                Text("+94")
-                    .font(.cfDisplay(size: 15))
-                    .foregroundColor(.cfText)
-                Image(systemName: "chevron.down")
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(Color(hex: "#8e8e93"))
-            }
-            .padding(.leading, 12)
-            .padding(.trailing, 8)
-
-            // Divider
-            Rectangle()
-                .fill(focused ? Color.cfBlue : Color.cfBorder)
-                .frame(width: 1.5, height: 24)
-
-            // Number input
-            TextField("", text: $text)
-                .font(.cfDisplay(size: 15))
-                .foregroundColor(.cfText)
-                .keyboardType(.phonePad)
-                .focused($focused)
-                .padding(.leading, 10)
+    private func validatePhone() -> Bool {
+        let digits = phone.filter { $0.isNumber }
+        if digits.isEmpty {
+            phoneError = "Please enter a phone number"
+            return false
         }
-        .frame(height: 52)
-        .background(Color(hex: "#fafafa"))
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(focused ? Color.cfBlue : Color.cfBorder, lineWidth: 1.5)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .animation(.easeInOut(duration: 0.2), value: focused)
+        if digits.count < 6 {
+            phoneError = "Phone number is too short"
+            return false
+        }
+        phoneError = nil
+        return true
     }
 }
+
+
 
 // ─── MARK: Send OTP Button ────────────────────────────────────────────────────
 
@@ -187,38 +166,9 @@ private struct DividerWithLabel: View {
     }
 }
 
-// ─── MARK: Social Button ──────────────────────────────────────────────────────
-
-private struct SocialButton: View {
-    let imageName: String
-    @State private var hovered = false
-
-    var body: some View {
-        Button(action: {}) {
-            Image(imageName)                       // add to Assets.xcassets
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20)
-                .frame(width: 54, height: 54)
-                .background(hovered ? Color(hex: "#f0f0f5") : Color(hex: "#fafafa"))
-                .clipShape(Circle())
-                .overlay(
-                    Circle()
-                        .stroke(
-                            hovered ? Color(hex: "#c8c8d0") : Color.cfBorder,
-                            lineWidth: 1.5
-                        )
-                )
-                .shadow(color: .black.opacity(0.06), radius: 2, x: 0, y: 1)
-                .animation(.easeInOut(duration: 0.15), value: hovered)
-        }
-        .buttonStyle(.plain)
-        .onHover { hovered = $0 }
-    }
-}
 
 // ─── MARK: Preview ────────────────────────────────────────────────────────────
 
 #Preview {
-    LoginScreen(onSendOTP: {})
+    LoginScreen(onSendOTP: {}, onSignup: {})
 }
