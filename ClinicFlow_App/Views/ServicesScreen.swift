@@ -16,6 +16,7 @@ struct ServicesScreen: View {
     var onAppointment:   (ServiceDoctor) -> Void = { _ in }
 
     @State private var activeTab: ServicesTab = .doctor
+    @State private var showSearch: Bool = false
 
     init(initialTab: ServicesTab = .doctor,
          onBack: @escaping () -> Void = {},
@@ -37,6 +38,12 @@ struct ServicesScreen: View {
 
             // ── Fixed top bar ──────────────────────────────────────────────
             topBar
+
+            // ── Collapsible search bar ─────────────────────────────────────
+            if showSearch {
+                SearchBar(placeholder: "Search Doctors, Services")
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
 
             // ── Fixed tab bar ──────────────────────────────────────────────
             tabBar
@@ -76,46 +83,14 @@ struct ServicesScreen: View {
     // ── Top bar ────────────────────────────────────────────────────────────
 
     private var topBar: some View {
-        HStack {
-            // Back button
-            Button { onBack() } label: {
-                ZStack {
-                    Circle()
-                        .fill(Color(hex: "#F2F2F7"))
-                        .frame(width: 36, height: 36)
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(Color(hex: "#1a1a1a"))
-                }
-            }
-            .buttonStyle(.plain)
-
-            Spacer()
-
-            Text("Services")
-                .font(.system(size: 17, weight: .bold))
-                .foregroundColor(Color(hex: "#1a1a1a"))
-                .kerning(-0.3)
-
-            Spacer()
-
-            // Search icon
-            Button {} label: {
-                ZStack {
-                    Circle()
-                        .fill(Color(hex: "#F2F2F7"))
-                        .frame(width: 36, height: 36)
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 15, weight: .medium))
-                        .foregroundColor(Color(hex: "#555555"))
-                }
-            }
-            .buttonStyle(.plain)
-        }
-        .padding(.horizontal, 18)
-        .padding(.top, 12)
-        .padding(.bottom, 8)
-        .background(Color.white)
+        TopBar(
+            title:          "Services",
+            showBack:        true,
+            showSearch:      true,
+            isSearchActive:  showSearch,
+            onBack:          onBack,
+            onSearch:        { withAnimation(.easeInOut(duration: 0.2)) { showSearch.toggle() } }
+        )
     }
 
     // ── Tab bar ────────────────────────────────────────────────────────────
