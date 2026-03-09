@@ -14,120 +14,157 @@ enum AppScreen {
     case phoneVerified
     case home
     case services
+    case notifications
+    case map
 }
+
+// Screens that show the persistent BottomNav
+private let mainTabs: [AppScreen] = [.home, .services, .notifications, .map]
 
 struct ContentView: View {
     @State private var currentScreen: AppScreen = .splash
     @State private var servicesTab: ServicesTab = .doctor
 
+    // Whether BottomNav should be visible
+    private var showBottomNav: Bool {
+        mainTabs.contains(currentScreen)
+    }
+
+    private var activeTabLabel: String {
+        switch currentScreen {
+        case .home:          return "Home"
+        case .services:      return "Services"
+        case .map:           return "Map"
+        default:             return ""
+        }
+    }
+
     var body: some View {
-        ZStack {
-            switch currentScreen {
+        VStack(spacing: 0) {
 
-            case .splash:
-                SplashScreen(onTap: {
-                    withAnimation(.easeInOut(duration: 0.4)) {
-                        currentScreen = .login
-                    }
-                })
+            // ── Screen content fills all space above BottomNav ─────────────
+            ZStack {
+                switch currentScreen {
 
-            case .login:
-                LoginScreen(
-                    onSendOTP: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            currentScreen = .otpVerification
-                        }
-                    },
-                    onSignup: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            currentScreen = .signup
-                        }
-                    }
-                )
-
-            case .signup:
-                SignupScreen(
-                    onBack: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
+                case .splash:
+                    SplashScreen(onTap: {
+                        withAnimation(.easeInOut(duration: 0.4)) {
                             currentScreen = .login
                         }
-                    },
-                    onLogin: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            currentScreen = .login
-                        }
-                    }
-                )
+                    })
 
-            case .otpVerification:
-                OTPVerificationScreen(
-                    onVerified: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            currentScreen = .phoneVerified
+                case .login:
+                    LoginScreen(
+                        onSendOTP: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .otpVerification
+                            }
+                        },
+                        onSignup: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .signup
+                            }
                         }
-                    },
-                    onBack: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            currentScreen = .login
-                        }
-                    }
-                )
+                    )
 
-            case .phoneVerified:
-                PhoneVerifiedScreen(
-                    onContinue: {
+                case .signup:
+                    SignupScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .login
+                            }
+                        },
+                        onLogin: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .login
+                            }
+                        }
+                    )
+
+                case .otpVerification:
+                    OTPVerificationScreen(
+                        onVerified: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .phoneVerified
+                            }
+                        },
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .login
+                            }
+                        }
+                    )
+
+                case .phoneVerified:
+                    PhoneVerifiedScreen(
+                        onContinue: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .home
+                            }
+                        }
+                    )
+
+                case .home:
+                    HomeScreen(
+                        onNotificationTap: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .notifications
+                            }
+                        },
+                        onSeeAllDoctors: { navigateToServices(tab: .doctor) },
+                        onSeeAllLabs:    { navigateToServices(tab: .lab) },
+                        onDoctorTap:     { _ in navigateToServices(tab: .doctor) },
+                        onLabTap:        { _ in navigateToServices(tab: .lab) },
+                        onCategoryTap:   { category in
+                            switch category {
+                            case .emergency: navigateToServices(tab: .doctor)
+                            case .doctors:   navigateToServices(tab: .doctor)
+                            case .labs:      navigateToServices(tab: .lab)
+                            case .pharmacy:  navigateToServices(tab: .pharmacy)
+                            }
+                        }
+                    )
+
+                case .services:
+                    ServicesScreen(
+                        initialTab: servicesTab,
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .home
+                            }
+                        }
+                    )
+
+                case .notifications:
+                    NotificationsScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .home
+                            }
+                        }
+                    )
+
+                case .map:
+                    MapScreen(onBack: {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             currentScreen = .home
                         }
-                    }
-                )
-
-            case .home:
-                HomeScreen(
-                    onNotificationTap: {},
-                    onSeeAllDoctors: {
-                        navigateToServices(tab: .doctor)
-                    },
-                    onSeeAllLabs: {
-                        navigateToServices(tab: .lab)
-                    },
-                    onDoctorTap: { _ in
-                        navigateToServices(tab: .doctor)
-                    },
-                    onLabTap: { _ in
-                        navigateToServices(tab: .lab)
-                    },
-                    onCategoryTap: { category in
-                        switch category {
-                        case .emergency: navigateToServices(tab: .doctor)
-                        case .doctors:   navigateToServices(tab: .doctor)
-                        case .labs:      navigateToServices(tab: .lab)
-                        case .pharmacy:  navigateToServices(tab: .pharmacy)
-                        }
-                    }
-                )
-                .withBottomNav(current: .home) { tab in
-                    navigate(to: tab)
+                    })
                 }
+            }
+            .animation(.easeInOut(duration: 0.35), value: currentScreen)
 
-            case .services:
-                ServicesScreen(
-                    initialTab: servicesTab,
-                    onBack: {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            currentScreen = .home
-                        }
-                    }
-                )
-                .withBottomNav(current: .services) { tab in
+            // ── Persistent BottomNav — only shown on main tab screens ──────
+            if showBottomNav {
+                BottomNav(activeTab: activeTabLabel) { tab in
                     navigate(to: tab)
                 }
             }
         }
-        .animation(.easeInOut(duration: 0.35), value: currentScreen)
+        .ignoresSafeArea(edges: .bottom)
     }
 
-    // ── Navigate to services with a specific tab ─────────────────────────────
+    // ── Navigate to services with a specific tab ───────────────────────────
 
     private func navigateToServices(tab: ServicesTab) {
         servicesTab = tab
@@ -142,7 +179,8 @@ struct ContentView: View {
         let target: AppScreen = switch tab {
         case "Home":     .home
         case "Services": .services
-        default:         currentScreen   // other tabs not built yet
+        case "Map":      .map
+        default:         currentScreen
         }
         guard target != currentScreen else { return }
         withAnimation(.easeInOut(duration: 0.3)) {
