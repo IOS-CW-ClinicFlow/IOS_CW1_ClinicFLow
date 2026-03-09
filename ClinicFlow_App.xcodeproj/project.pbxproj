@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FE4E965A2F5BFE8200CBF4F4 /* ClinicFlow_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ClinicFlow_App.app; path = "/Users/COBSCCOMP24.2P-019/ios/cobsccomp24.2p-019/IOS_CW1_ClinicFLow/build/Debug-iphoneos/ClinicFlow_App.app"; sourceTree = "<absolute>"; };
-		FE4E96672F5BFE8600CBF4F4 /* ClinicFlow_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ClinicFlow_AppTests.xctest; path = "/Users/COBSCCOMP24.2P-019/ios/cobsccomp24.2p-019/IOS_CW1_ClinicFLow/build/Debug-iphoneos/ClinicFlow_App.app/PlugIns/ClinicFlow_AppTests.xctest"; sourceTree = "<absolute>"; };
-		FE4E96712F5BFE8600CBF4F4 /* ClinicFlow_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ClinicFlow_AppUITests.xctest; path = "/Users/COBSCCOMP24.2P-019/ios/cobsccomp24.2p-019/IOS_CW1_ClinicFLow/build/Debug-iphoneos/ClinicFlow_AppUITests-Runner.app/PlugIns/ClinicFlow_AppUITests.xctest"; sourceTree = "<absolute>"; };
+		6262EA7E2F5F03D000A9EB64 /* ClinicFlow_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinicFlow_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6262EA7F2F5F03D000A9EB64 /* ClinicFlow_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicFlow_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6262EA802F5F03D000A9EB64 /* ClinicFlow_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicFlow_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -78,6 +78,9 @@
 				FE4E965C2F5BFE8200CBF4F4 /* ClinicFlow_App */,
 				FE4E966A2F5BFE8600CBF4F4 /* ClinicFlow_AppTests */,
 				FE4E96742F5BFE8600CBF4F4 /* ClinicFlow_AppUITests */,
+				6262EA7E2F5F03D000A9EB64 /* ClinicFlow_App.app */,
+				6262EA7F2F5F03D000A9EB64 /* ClinicFlow_AppTests.xctest */,
+				6262EA802F5F03D000A9EB64 /* ClinicFlow_AppUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,7 +106,7 @@
 			packageProductDependencies = (
 			);
 			productName = ClinicFlow_App;
-			productReference = FE4E965A2F5BFE8200CBF4F4 /* ClinicFlow_App.app */;
+			productReference = 6262EA7E2F5F03D000A9EB64 /* ClinicFlow_App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FE4E96662F5BFE8600CBF4F4 /* ClinicFlow_AppTests */ = {
@@ -126,7 +129,7 @@
 			packageProductDependencies = (
 			);
 			productName = ClinicFlow_AppTests;
-			productReference = FE4E96672F5BFE8600CBF4F4 /* ClinicFlow_AppTests.xctest */;
+			productReference = 6262EA7F2F5F03D000A9EB64 /* ClinicFlow_AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		FE4E96702F5BFE8600CBF4F4 /* ClinicFlow_AppUITests */ = {
@@ -149,7 +152,7 @@
 			packageProductDependencies = (
 			);
 			productName = ClinicFlow_AppUITests;
-			productReference = FE4E96712F5BFE8600CBF4F4 /* ClinicFlow_AppUITests.xctest */;
+			productReference = 6262EA802F5F03D000A9EB64 /* ClinicFlow_AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */

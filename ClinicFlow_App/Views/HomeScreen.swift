@@ -86,39 +86,11 @@ struct HomeScreen: View {
                     LanguageBadge()
                 }
             }
+            .padding(.horizontal, 18)
 
-            // Search
-            HStack(spacing: 9) {
-                HStack(spacing: 8) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 15))
-                        .foregroundColor(Color(hex: "#BBBBCC"))
-                    Text("Search")
-                        .font(.system(size: 14))
-                        .foregroundColor(Color(hex: "#C8C8D0"))
-                    Spacer()
-                }
-                .padding(.horizontal, 14)
-                .frame(height: 44)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color(hex: "#E8E8EE"), lineWidth: 1.5))
-
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color(hex: "#2196F3"))
-                        .frame(width: 44, height: 44)
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.4), radius: 12, x: 0, y: 4)
-                    Image(systemName: "slider.horizontal.3")
-                        .font(.system(size: 17, weight: .medium))
-                        .foregroundColor(.white)
-                }
-            }
+            SearchBar(placeholder: "Search Doctors, Labs, Services")
         }
-        .padding(.horizontal, 18)
         .padding(.top, 10)
-        .padding(.bottom, 16)
         .background(Color.white)
     }
 

@@ -30,15 +30,12 @@ struct BottomNav: View {
                 let isActive = tab.label == activeTab
                 Button { onTap(tab.label) } label: {
                     VStack(spacing: 4) {
-                        // Active indicator bar
                         RoundedRectangle(cornerRadius: 2)
                             .fill(isActive ? Color(hex: "#2a9df4") : Color.clear)
                             .frame(width: 28, height: 3)
-
                         Image(systemName: isActive ? tab.iconFilled : tab.icon)
                             .font(.system(size: 22, weight: isActive ? .semibold : .regular))
                             .foregroundColor(isActive ? Color(hex: "#2a9df4") : Color(hex: "#aaaaaa"))
-
                         Text(tab.label)
                             .font(.system(size: 10, weight: isActive ? .semibold : .regular))
                             .foregroundColor(isActive ? Color(hex: "#2a9df4") : Color(hex: "#aaaaaa"))
@@ -59,37 +56,9 @@ struct BottomNav: View {
     }
 }
 
-// ── View modifier so any screen can attach nav ─────────────────────────────────
-
-struct WithBottomNavModifier: ViewModifier {
-    let current: AppScreen
-    let onTap: (String) -> Void
-
-    private var activeLabel: String {
-        switch current {
-        case .home:     return "Home"
-        case .services: return "Services"
-        default:        return ""
-        }
-    }
-
-    func body(content: Content) -> some View {
-        VStack(spacing: 0) {
-            content
-            BottomNav(activeTab: activeLabel, onTap: onTap)
-        }
-    }
-}
-
-extension View {
-    func withBottomNav(current: AppScreen, onTap: @escaping (String) -> Void) -> some View {
-        modifier(WithBottomNavModifier(current: current, onTap: onTap))
-    }
-}
-
 #Preview {
     VStack {
         Spacer()
-        BottomNav(activeTab: "Home") { tab in print(tab) }
+        BottomNav(activeTab: "Home") { print($0) }
     }
 }
