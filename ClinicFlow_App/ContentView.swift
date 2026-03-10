@@ -14,6 +14,7 @@ indirect enum AppScreen: Equatable {
     case phoneVerified
     case home
     case call
+    case emergency
     case services
     case notifications
     case map
@@ -124,7 +125,10 @@ struct ContentView: View {
                         onLabTap:      { _ in navigateToServices(tab: .lab) },
                         onCategoryTap: { category in
                             switch category {
-                            case .emergency: navigateToServices(tab: .doctor)
+                            case .emergency:
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .emergency
+                            }
                             case .doctors:   navigateToServices(tab: .doctor)
                             case .labs:      navigateToServices(tab: .lab)
                             case .pharmacy:  navigateToServices(tab: .pharmacy)
@@ -137,6 +141,20 @@ struct ContentView: View {
                         onEnd: {
                             withAnimation(.easeInOut(duration: 0.4)) {
                                 currentScreen = .home
+                            }
+                        }
+                    )
+
+                case .emergency:
+                    EmergencyScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .home
+                            }
+                        },
+                        onCall: { actionType in
+                            withAnimation(.easeInOut(duration: 0.4)) {
+                                currentScreen = .call
                             }
                         }
                     )
