@@ -12,9 +12,13 @@ enum HomeData {
     static let currentAppointment = Appointment(
         doctorName: "Dr. Nayanathara",
         specialty:  "Cardio Consultation",
-        date:       "Monday, 25 Mar",
-        timeSlot:   "09:00 - 10:00",
-        avatarName: "doctor_avatar"         // add to Assets.xcassets
+        date:       "Mar 25, 2026",
+        time:       "09:00 AM",
+        location:   "Floor 1, Room 7",
+        bookingId:  "#DR4S2SA54",
+        avatarName: "doctor_avatar",
+        status:     .upcoming,
+        remindMe:   true
     )
 
     // ─── Today's Doctors ──────────────────────────────────────────────────
