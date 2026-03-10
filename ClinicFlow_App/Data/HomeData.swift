@@ -12,30 +12,39 @@ enum HomeData {
     static let currentAppointment = Appointment(
         doctorName: "Dr. Nayanathara",
         specialty:  "Cardio Consultation",
-        date:       "Mar 25, 2026",
-        time:       "09:00 AM",
-        location:   "Floor 1, Room 7",
-        bookingId:  "#DR4S2SA54",
+        date:       "Monday, 25 Mar",
+        time:       "09:00 - 10:00",
+        location:   "Floor 1, Room 3",
+        bookingId:  "#CF00123",
         avatarName: "doctor_avatar",
-        status:     .upcoming,
-        remindMe:   true
+        status:     .upcoming
     )
 
     // ─── Today's Doctors ──────────────────────────────────────────────────
     static let doctors: [Doctor] = [
         Doctor(
-            name:               "Dr. Sarath Dassanayake",
-            credentials:        "MBBA, CEO, WWE",
-            rating:             4.3,
-            imageName:          "doctor_male",
-            backgroundColorHex: "#D6E8F5"
+            name:               "Dr. Ryan De Silva",
+            credentials:        "MBBS, MD Cardiology",
+            rating:             4.9,
+            imageName:          "doc_ryan",
+            backgroundColorHex: "#D6E8F5",
+            slug:               "ryan-de-silva"
         ),
         Doctor(
-            name:               "Dr. Amila Herath",
-            credentials:        "MBBA, CEO",
+            name:               "Dr. Jayaani Dennis",
+            credentials:        "MBBS, MSc Physiology",
+            rating:             4.8,
+            imageName:          "doc_jayaani",
+            backgroundColorHex: "#E8E8F2",
+            slug:               "jayaani-dennis"
+        ),
+        Doctor(
+            name:               "Dr. Sarath Fernando",
+            credentials:        "BDS, MDS Dentistry",
             rating:             4.7,
-            imageName:          "doctor_female",
-            backgroundColorHex: "#E8E8F2"
+            imageName:          "doc_sarath",
+            backgroundColorHex: "#D6F5E8",
+            slug:               "sarath-fernando"
         ),
     ]
 
