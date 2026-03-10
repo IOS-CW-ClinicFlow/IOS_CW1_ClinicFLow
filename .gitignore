@@ -1,0 +1,33 @@
+//
+//  .gitignore
+//  ClinicFlow_App
+//
+//  Created by cobsccomp24.2p-021 on 2026-03-10.
+//
+# macOS system files
+.DS_Store
+
+# Xcode build files
+build/
+DerivedData/
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Xcode archives
+*.xcarchive
+
+# Temporary files
+*.swp
+*.lock

@@ -27,6 +27,7 @@
 		6262EA7E2F5F03D000A9EB64 /* ClinicFlow_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinicFlow_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6262EA7F2F5F03D000A9EB64 /* ClinicFlow_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicFlow_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6262EA802F5F03D000A9EB64 /* ClinicFlow_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicFlow_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C537CC982F5FE92C0076D697 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		FE4E96512F5BFE8200CBF4F4 = {
 			isa = PBXGroup;
 			children = (
+				C537CC982F5FE92C0076D697 /* .gitignore */,
 				FE4E965C2F5BFE8200CBF4F4 /* ClinicFlow_App */,
 				FE4E966A2F5BFE8600CBF4F4 /* ClinicFlow_AppTests */,
 				FE4E96742F5BFE8600CBF4F4 /* ClinicFlow_AppUITests */,
