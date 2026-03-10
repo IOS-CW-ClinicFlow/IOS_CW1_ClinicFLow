@@ -14,7 +14,6 @@ struct OTPVerificationScreen: View {
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-
             VStack(spacing: 0) {
                 OTPContent(onVerified: onVerified, onBack: onBack)
             }
@@ -32,88 +31,76 @@ private struct OTPContent: View {
     @State private var resendTimer = 0
     @FocusState private var focusedIndex: Int?
 
-    // Countdown timer
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
+        // ── Top bar with title ─────────────────────────────────────────────
+        TopBar(title: "Phone Verification", showBack: true, onBack: onBack)
+
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(spacing: 0) {
 
-                // ── Back Button ───────────────────────────────────────────────
-                BackButton(action: onBack)
-
-                // ── Title ─────────────────────────────────────────────────────
-                Text("Phone Verification")
-                    .font(.cfDisplay(size: 22, weight: .bold))
-                    .foregroundColor(.cfText)
-                    .kerning(-0.4)
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 16)
-
-                // ── Subtitle ──────────────────────────────────────────────────────
-                Text("Enter 6 digit verification code sent to your phone number")
+                // ── Subtitle ──────────────────────────────────────────────
+                Text("Enter 6 digit verification code sent to\nyour phone number")
                     .font(.cfDisplay(size: 15))
                     .foregroundColor(Color(hex: "#555555"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
-                    .frame(maxWidth: 280)
+                    .padding(.top, 32)
                     .padding(.bottom, 40)
 
-                // ── OTP Boxes ─────────────────────────────────────────────────────
+                // ── OTP Boxes — centred ───────────────────────────────────
                 HStack(spacing: 10) {
                     ForEach(0..<6, id: \.self) { i in
                         OTPBox(
                             digit:     $otp[i],
                             isFocused: focusedIndex == i,
-                            onCommit: { handleChange(index: i) }
+                            onCommit:  { handleChange(index: i) }
                         )
                         .focused($focusedIndex, equals: i)
                     }
                 }
                 .padding(.bottom, 36)
 
-                // ── Resend Button ─────────────────────────────────────────────────
+                // ── Resend Button ─────────────────────────────────────────
                 Button(action: handleResend) {
-                    Text(resendTimer > 0 ? "Resend Code (\(resendTimer)s)" : "Resend Code")
+                    Text(resendTimer > 0
+                         ? "Resend Code (\(resendTimer)s)"
+                         : "Resend Code")
                         .font(.cfDisplay(size: 15, weight: .semibold))
-                        .foregroundColor(resendTimer > 0 ? Color(hex: "#aaaaaa") : Color.cfBlue)
+                        .foregroundColor(resendTimer > 0
+                                         ? Color(hex: "#aaaaaa")
+                                         : Color.cfBlue)
                         .animation(.easeInOut(duration: 0.2), value: resendTimer)
-                        .frame(maxWidth: .infinity)
                         .multilineTextAlignment(.center)
                 }
                 .buttonStyle(.plain)
                 .disabled(resendTimer > 0)
             }
+            // Centre the entire block horizontally
+            .frame(maxWidth: .infinity)
             .padding(.horizontal, 28)
-            .padding(.top, 16)
+            .padding(.top, 24)
+            .padding(.bottom, 24)
         }
         .onReceive(timer) { _ in
             if resendTimer > 0 { resendTimer -= 1 }
         }
-        .onAppear {
-            focusedIndex = 0
-        }
+        .onAppear { focusedIndex = 0 }
     }
 
-    // ── Logic ─────────────────────────────────────────────────────────────────
+    // ── Logic ─────────────────────────────────────────────────────────────
 
     private func handleChange(index: Int) {
-        // Auto-advance
-        if !otp[index].isEmpty && index < 5 {
-            focusedIndex = index + 1
-        }
-        // Auto-submit when all 6 filled
+        if !otp[index].isEmpty && index < 5 { focusedIndex = index + 1 }
         if otp.allSatisfy({ !$0.isEmpty }) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                onVerified()
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { onVerified() }
         }
     }
 
     private func handleResend() {
-        otp         = Array(repeating: "", count: 6)
-        resendTimer = 30
+        otp          = Array(repeating: "", count: 6)
+        resendTimer  = 30
         focusedIndex = 0
     }
 }
@@ -142,16 +129,16 @@ private struct OTPBox: View {
                     .stroke(borderColor, lineWidth: 1.5)
             )
             .overlay(
-                // Glow ring when digit is filled
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.cfBlue.opacity(!digit.isEmpty ? 0.1 : 0), lineWidth: 6)
             )
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .animation(.easeInOut(duration: 0.2), value: digit)
             .onChange(of: digit) { newValue in
-                // Keep only last digit entered
+                // If box already had a digit, reject the new character
                 if newValue.count > 1 {
-                    digit = String(newValue.suffix(1))
+                    digit = String(newValue.prefix(1))
+                    return
                 }
                 // Only allow numeric input
                 digit = digit.filter { $0.isNumber }
