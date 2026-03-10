@@ -27,8 +27,16 @@ indirect enum AppScreen: Equatable {
     case selectPackage(DoctorDetail)
     case patientDetails(DoctorDetail)
     case payment(DoctorDetail)
+    case addCard(DoctorDetail)
+    case reviewSummary(ReviewSummaryInfo)
+    case successScreen(SuccessInfo)
     case consultationComplete
     case profile
+    case labDetail(LabDetail)
+    case labPatientDetails(LabDetail, date: String, time: String)
+    case labPayment(LabDetail, date: String, time: String)
+    case labAddCard(LabDetail, date: String, time: String)
+    case labReviewSummary(ReviewSummaryInfo)
 }
 
 private let mainTabs: [AppScreen] = [.home, .services, .notifications, .map, .appointments, .profile]
@@ -320,9 +328,125 @@ struct ContentView: View {
                                 currentScreen = .patientDetails(doctor)
                             }
                         },
-                        onNext: { _ in
+                        onNext: { method in
                             withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .appointments
+                                if method == .card {
+                                    currentScreen = .addCard(doctor)
+                                } else {
+                                    // bank or cash → skip card entry, go straight to review
+                                    let info = ReviewSummaryInfo(
+                                        context:       .doctor(doctor),
+                                        dateAndHour:   "October 4, 2026 | 07:00 PM",
+                                        packageName:   "Visiting",
+                                        bookingFor:    "Self",
+                                        amount:        "Rs 4,000",
+                                        paymentMethod: method
+                                    )
+                                    currentScreen = .reviewSummary(info)
+                                }
+                            }
+                        }
+                    )
+
+                case .addCard(let doctor):
+                    AddCardScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .payment(doctor)
+                            }
+                        },
+                        onAddCard: { _ in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                let info = ReviewSummaryInfo(
+                                    context:       .doctor(doctor),
+                                    dateAndHour:   "October 4, 2026 | 07:00 PM",
+                                    packageName:   "Visiting",
+                                    bookingFor:    "Self",
+                                    amount:        "Rs 4,000",
+                                    paymentMethod: .card
+                                )
+                                currentScreen = .reviewSummary(info)
+                            }
+                        }
+                    )
+
+                case .reviewSummary(let info):
+                    ReviewSummaryScreen(
+                        info: info,
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                switch info.paymentMethod {
+                                case .card:
+                                    if case .doctor(let doctor) = info.context {
+                                        currentScreen = .addCard(doctor)
+                                    }
+                                default:
+                                    if case .doctor(let doctor) = info.context {
+                                        currentScreen = .payment(doctor)
+                                    }
+                                }
+                            }
+                        },
+                        onPay: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                // Card → Payment Success first, then Booking Success
+                                // Cash/bank → Booking Success directly
+                                if info.paymentMethod == .card {
+                                    let entityName: String
+                                    if case .doctor(let d) = info.context { entityName = d.name }
+                                    else if case .lab(let n, _) = info.context { entityName = n }
+                                    else { entityName = "" }
+                                    currentScreen = .successScreen(
+                                        SuccessData.doctorPayment(entityName: entityName)
+                                    )
+                                } else {
+                                    let entityName: String
+                                    if case .doctor(let d) = info.context { entityName = d.name }
+                                    else if case .lab(let n, _) = info.context { entityName = n }
+                                    else { entityName = "" }
+                                    currentScreen = .successScreen(
+                                        SuccessData.doctorBooking(entityName: entityName)
+                                    )
+                                }
+                            }
+                        },
+                        onChangePayment: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                if case .doctor(let doctor) = info.context {
+                                    currentScreen = .payment(doctor)
+                                }
+                            }
+                        }
+                    )
+
+                case .successScreen(let info):
+                    SuccessScreen(
+                        info: info,
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .home
+                            }
+                        },
+                        onViewAppointment: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                // If this was paymentSuccess, next step is bookingSuccess
+                                switch info.kind {
+                                case .paymentSuccess:
+                                    currentScreen = .successScreen(
+                                        SuccessData.doctorBooking(entityName: info.entityName)
+                                    )
+                                case .labPaymentSuccess:
+                                    currentScreen = .successScreen(
+                                        SuccessData.labBooking(entityName: info.entityName)
+                                    )
+                                default:
+                                    currentScreen = .appointments
+                                }
+                            }
+                        },
+                        onGoHome: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .home
                             }
                         }
                     )
@@ -332,6 +456,119 @@ struct ContentView: View {
                         onBack: {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 currentScreen = .home
+                            }
+                        }
+                    )
+
+                case .labDetail(let lab):
+                    LabDetailScreen(
+                        lab: lab,
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .services
+                            }
+                        },
+                        onBook: { lab, date, time in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .labPatientDetails(lab, date: date, time: time)
+                            }
+                        }
+                    )
+
+                case .labPatientDetails(let lab, let date, let time):
+                    PatientDetailsScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .labDetail(lab)
+                            }
+                        },
+                        onNext: { _ in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .labPayment(lab, date: date, time: time)
+                            }
+                        }
+                    )
+
+                case .labPayment(let lab, let date, let time):
+                    PaymentScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .labPatientDetails(lab, date: date, time: time)
+                            }
+                        },
+                        onNext: { method in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                if method == .card {
+                                    currentScreen = .labAddCard(lab, date: date, time: time)
+                                } else {
+                                    let info = ReviewSummaryInfo(
+                                        context:       .lab(labName: lab.name, labImageName: lab.imageName),
+                                        dateAndHour:   "\(date) | \(time)",
+                                        packageName:   lab.name,
+                                        bookingFor:    "Self",
+                                        amount:        lab.serviceFee,
+                                        paymentMethod: method
+                                    )
+                                    currentScreen = .labReviewSummary(info)
+                                }
+                            }
+                        }
+                    )
+
+                case .labAddCard(let lab, let date, let time):
+                    AddCardScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .labPayment(lab, date: date, time: time)
+                            }
+                        },
+                        onAddCard: { _ in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                let info = ReviewSummaryInfo(
+                                    context:       .lab(labName: lab.name, labImageName: lab.imageName),
+                                    dateAndHour:   "\(date) | \(time)",
+                                    packageName:   lab.name,
+                                    bookingFor:    "Self",
+                                    amount:        lab.serviceFee,
+                                    paymentMethod: .card
+                                )
+                                currentScreen = .labReviewSummary(info)
+                            }
+                        }
+                    )
+
+                case .labReviewSummary(let info):
+                    ReviewSummaryScreen(
+                        info: info,
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                if case .lab(let name, _) = info.context {
+                                    if let lab = LabDetailData.byName[name] {
+                                        switch info.paymentMethod {
+                                        case .card: currentScreen = .labAddCard(lab, date: "", time: "")
+                                        default:    currentScreen = .labPayment(lab, date: "", time: "")
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        onPay: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                let entityName: String
+                                if case .lab(let n, _) = info.context { entityName = n } else { entityName = "" }
+                                if info.paymentMethod == .card {
+                                    currentScreen = .successScreen(SuccessData.labPayment(entityName: entityName))
+                                } else {
+                                    currentScreen = .successScreen(SuccessData.labBooking(entityName: entityName))
+                                }
+                            }
+                        },
+                        onChangePayment: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                if case .lab(let name, _) = info.context,
+                                   let lab = LabDetailData.byName[name] {
+                                    currentScreen = .labPayment(lab, date: "", time: "")
+                                }
                             }
                         }
                     )
