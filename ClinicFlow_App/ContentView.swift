@@ -16,10 +16,11 @@ enum AppScreen {
     case services
     case notifications
     case map
+    case profile
 }
 
 // Screens that show the persistent BottomNav
-private let mainTabs: [AppScreen] = [.home, .services, .notifications, .map]
+private let mainTabs: [AppScreen] = [.home, .services, .notifications, .map, .profile]
 
 struct ContentView: View {
     @State private var currentScreen: AppScreen = .splash
@@ -35,6 +36,7 @@ struct ContentView: View {
         case .home:          return "Home"
         case .services:      return "Services"
         case .map:           return "Map"
+        case .profile:       return "Profile"
         default:             return ""
         }
     }
@@ -150,6 +152,20 @@ struct ContentView: View {
                             currentScreen = .home
                         }
                     })
+
+                case .profile:
+                    ProfileScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .home
+                            }
+                        },
+                        onLogout: {
+                            withAnimation(.easeInOut(duration: 0.4)) {
+                                currentScreen = .splash
+                            }
+                        }
+                    )
                 }
             }
             .animation(.easeInOut(duration: 0.35), value: currentScreen)
@@ -180,6 +196,7 @@ struct ContentView: View {
         case "Home":     .home
         case "Services": .services
         case "Map":      .map
+        case "Profile":  .profile
         default:         currentScreen
         }
         guard target != currentScreen else { return }
