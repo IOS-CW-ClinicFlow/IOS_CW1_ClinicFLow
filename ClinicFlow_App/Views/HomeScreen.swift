@@ -4,13 +4,17 @@
 //
 //  Created by COBSCCOMP24.2P-019 on 2026-03-08.
 //
+//
 import SwiftUI
 
 struct HomeScreen: View {
 
-    var onNotificationTap:  () -> Void                = {}
-    var onSeeAllDoctors:    () -> Void                = {}
-    var onSeeAllLabs:       () -> Void                = {}
+    var onNotificationTap:      () -> Void                = {}
+    var onSeeAllDoctors:        () -> Void                = {}
+    var onSeeAllLabs:           () -> Void                = {}
+    var onSeeAllAppointments:   () -> Void                = {}
+    var onViewAppointment:      () -> Void                = {}
+    var onCallTap:              () -> Void                = {}
     var onDoctorTap:        (Doctor) -> Void          = { _ in }
     var onLabTap:           (Lab) -> Void             = { _ in }
     var onCategoryTap:      (ServiceCategory) -> Void = { _ in }
@@ -103,13 +107,14 @@ struct HomeScreen: View {
                     .font(.system(size: 18, weight: .heavy))
                     .foregroundColor(Color(hex: "#1a1a1a"))
                 Spacer()
-                Button("See All") {}
+                Button("See All") { onSeeAllAppointments() }
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(Color(hex: "#2196F3"))
             }
             .padding(.bottom, 12)
 
-            VStack(spacing: 0) {
+            Button { onViewAppointment() } label: {
+                VStack(spacing: 0) {
                 HStack(spacing: 12) {
                     Circle()
                         .fill(Color.white.opacity(0.3))
@@ -128,13 +133,16 @@ struct HomeScreen: View {
                             .foregroundColor(.white.opacity(0.9))
                     }
                     Spacer()
-                    ZStack {
-                        Circle().fill(Color.white).frame(width: 44, height: 44)
-                            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
-                        Image(systemName: "phone.fill")
-                            .font(.system(size: 18))
-                            .foregroundColor(Color(hex: "#2ECC88"))
+                    Button { onCallTap() } label: {
+                        ZStack {
+                            Circle().fill(Color.white).frame(width: 44, height: 44)
+                                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
+                            Image(systemName: "phone.fill")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color(hex: "#2ECC88"))
+                        }
                     }
+                    .buttonStyle(.plain)
                 }
                 .padding(.horizontal, 18)
                 .padding(.vertical, 16)
@@ -159,6 +167,8 @@ struct HomeScreen: View {
             .background(Color(hex: "#2ECC88"))
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(color: Color(hex: "#2ECC88").opacity(0.4), radius: 24, x: 0, y: 6)
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -171,7 +181,6 @@ struct HomeScreen: View {
                     .font(.system(size: 18, weight: .heavy))
                     .foregroundColor(Color(hex: "#1a1a1a"))
                 Spacer()
-                Button("See All") {}
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(Color(hex: "#2196F3"))
             }
@@ -208,57 +217,73 @@ struct HomeScreen: View {
             HStack {
                 Text("Today's Doctors")
                     .font(.system(size: 18, weight: .heavy))
-                    .foregroundColor(Color(hex: "#1a1a1a"))
+                    .foregroundStyle(Color(hex: "#1a1a1a"))
                 Spacer()
                 Button("See All", action: onSeeAllDoctors)
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Color(hex: "#2196F3"))
+                    .foregroundStyle(Color(hex: "#2196F3"))
             }
             .padding(.bottom, 12)
 
-            HStack(spacing: 12) {
-                ForEach(HomeData.doctors) { doctor in
-                    Button { onDoctorTap(doctor) } label: {
-                        VStack(spacing: 0) {
-                            ZStack(alignment: .bottomTrailing) {
-                                Color(hex: doctor.backgroundColorHex).frame(height: 110)
-                                Image(doctor.imageName)
-                                    .resizable().scaledToFill()
-                                    .frame(height: 110).clipped()
-                                HStack(spacing: 3) {
-                                    Image(systemName: "star.fill")
-                                        .font(.system(size: 9))
-                                        .foregroundColor(Color(hex: "#FFC107"))
-                                    Text(String(format: "%.1f", doctor.rating))
-                                        .font(.system(size: 11, weight: .bold))
-                                        .foregroundColor(Color(hex: "#333333"))
-                                }
-                                .padding(.vertical, 3).padding(.horizontal, 7)
-                                .background(Color.white)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                .shadow(color: .black.opacity(0.18), radius: 4, x: 0, y: 1)
-                                .padding(8)
-                            }
-                            .frame(height: 110).clipped()
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 14) {
+                    ForEach(HomeData.doctors) { doctor in
+                        Button { onDoctorTap(doctor) } label: {
+                            VStack(spacing: 0) {
 
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text(doctor.name)
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(Color(hex: "#1a1a1a"))
-                                    .lineLimit(2)
-                                Text(doctor.credentials)
-                                    .font(.system(size: 10))
-                                    .foregroundColor(Color(hex: "#aaaaaa"))
+                                // Image area
+                                ZStack(alignment: .bottomTrailing) {
+                                    Color(hex: doctor.backgroundColorHex)
+                                        .frame(height: 140)
+                                    Image(doctor.imageName)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: 140)
+                                        .clipped()
+
+                                    // Rating badge
+                                    HStack(spacing: 3) {
+                                        Image(systemName: "star.fill")
+                                            .font(.system(size: 10))
+                                            .foregroundStyle(Color(hex: "#FFC107"))
+                                        Text(String(format: "%.1f", doctor.rating))
+                                            .font(.system(size: 12, weight: .bold))
+                                            .foregroundStyle(Color(hex: "#333333"))
+                                    }
+                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 8)
+                                    .background(Color.white)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 1)
+                                    .padding(10)
+                                }
+                                .frame(height: 140)
+                                .clipped()
+
+                                // Name + credentials
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(doctor.name)
+                                        .font(.system(size: 13, weight: .bold))
+                                        .foregroundStyle(Color(hex: "#1a1a1a"))
+                                        .lineLimit(2)
+                                    Text(doctor.credentials)
+                                        .font(.system(size: 11))
+                                        .foregroundStyle(Color(hex: "#AAAAAA"))
+                                        .lineLimit(2)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 11)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 10).padding(.vertical, 9)
+                            .frame(width: 150)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .shadow(color: .black.opacity(0.07), radius: 12, x: 0, y: 3)
                         }
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 2)
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
+                .padding(.bottom, 4)   // room for shadow
             }
         }
     }

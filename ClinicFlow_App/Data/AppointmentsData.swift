@@ -8,6 +8,27 @@ import Foundation
 
 struct AppointmentsData {
 
+    // ── Tracking timer (seconds) — set to 15 for demo, higher for production
+    static let trackingCountdownSeconds: Int = 5
+
+    // ── Delay before Scan QR button appears after "Your Turn"
+    static let scanQRDelaySeconds: Double = 5.0
+
+    // ── Current queue status ──────────────────────────────────────────────
+    static var currentQueue = QueueInfo(
+        current:    20,
+        yourNumber: 21,
+        waitMin:    5
+    )
+
+    // ── Current patient (logged-in user) ──────────────────────────────────
+    static let currentPatient = PatientInfo(
+        fullName: "Saman Edirimuna",
+        gender:   "Male",
+        age:      "34",
+        problem:  "Pains"
+    )
+
     static let appointments: [Appointment] = [
 
         // ── Upcoming ───────────────────────────────────────────────────────
