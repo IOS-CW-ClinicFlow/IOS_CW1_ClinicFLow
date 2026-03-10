@@ -26,6 +26,7 @@ indirect enum AppScreen: Equatable {
     case bookAppointment(DoctorDetail)
     case selectPackage(DoctorDetail)
     case patientDetails(DoctorDetail)
+    case payment(DoctorDetail)
     case consultationComplete
     case profile
 }
@@ -303,6 +304,20 @@ struct ContentView: View {
                         onBack: {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 currentScreen = .selectPackage(doctor)
+                            }
+                        },
+                        onNext: { _ in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .payment(doctor)
+                            }
+                        }
+                    )
+
+                case .payment(let doctor):
+                    PaymentScreen(
+                        onBack: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .patientDetails(doctor)
                             }
                         },
                         onNext: { _ in
