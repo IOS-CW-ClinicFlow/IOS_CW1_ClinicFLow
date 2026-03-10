@@ -2,7 +2,7 @@
 // ContentView.swift
 //  ClinicFlow_App
 //
-//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//  Created by COBSCCOMP24.2P-019 on 2026-03-07.
 //
 import SwiftUI
 
@@ -17,10 +17,11 @@ enum AppScreen {
     case notifications
     case map
     case profile
+    case appointments
 }
 
 // Screens that show the persistent BottomNav
-private let mainTabs: [AppScreen] = [.home, .services, .notifications, .map, .profile]
+private let mainTabs: [AppScreen] = [.home, .services, .notifications, .map, .profile, .appointments]
 
 struct ContentView: View {
     @State private var currentScreen: AppScreen = .splash
@@ -37,6 +38,7 @@ struct ContentView: View {
         case .services:      return "Services"
         case .map:           return "Map"
         case .profile:       return "Profile"
+        case .appointments:  return "Appointments"
         default:             return ""
         }
     }
@@ -153,6 +155,18 @@ struct ContentView: View {
                         }
                     })
 
+                case .appointments:
+                    AppointmentsScreen(onBack: {
+                        withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
+                    })
+
+                case .appointments:
+                    AppointmentsScreen(onBack: {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            currentScreen = .home
+                        }
+                    })
+
                 case .profile:
                     ProfileScreen(
                         onBack: {
@@ -196,8 +210,9 @@ struct ContentView: View {
         case "Home":     .home
         case "Services": .services
         case "Map":      .map
-        case "Profile":  .profile
-        default:         currentScreen
+        case "Profile":       .profile
+        case "Appointments":  .appointments
+        default:              currentScreen
         }
         guard target != currentScreen else { return }
         withAnimation(.easeInOut(duration: 0.3)) {
