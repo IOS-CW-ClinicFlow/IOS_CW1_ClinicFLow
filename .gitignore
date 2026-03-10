@@ -11,9 +11,15 @@
 build/
 DerivedData/
 
-# Xcode user data
-xcuserdata/
+# Xcode user data (per-user, do NOT track)
+*.xcuserdatad/
 *.xcuserstate
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+
+# Xcode workspace settings
+xcshareddata/
 
 # Swift Package Manager
 .build/
@@ -31,3 +37,4 @@ Carthage/Build/
 # Temporary files
 *.swp
 *.lock
+*.hmap
