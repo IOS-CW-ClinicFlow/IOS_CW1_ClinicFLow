@@ -8,7 +8,9 @@ import SwiftUI
 
 struct AppointmentsScreen: View {
 
-    var onBack: () -> Void = {}
+    var onBack:            () -> Void                  = {}
+    var onAppointmentTap:  (Appointment) -> Void       = { _ in }
+    var onStartNow:        (Appointment) -> Void       = { _ in }
 
     @State private var activeTab: AppointmentStatus = .upcoming
     @State private var showSearch: Bool = false
@@ -53,12 +55,16 @@ struct AppointmentsScreen: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 14) {
                         ForEach(Array(filtered.enumerated()), id: \.element.id) { index, appt in
-                            AppointmentCard(
-                                appointment:    appt,
-                                remindMe:       remindStates[appt.id] ?? false,
-                                onRemindToggle: { remindStates[appt.id]?.toggle() },
-                                isFirstUpcoming: activeTab == .upcoming && index == 0
-                            )
+                            Button { onAppointmentTap(appt) } label: {
+                                AppointmentCard(
+                                    appointment:     appt,
+                                    remindMe:        remindStates[appt.id] ?? false,
+                                    onRemindToggle:  { remindStates[appt.id]?.toggle() },
+                                    onStartNow:      { onStartNow(appt) },
+                                    isFirstUpcoming: activeTab == .upcoming && index == 0
+                                )
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding(.horizontal, 16)
