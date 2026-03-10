@@ -38,3 +38,21 @@ Carthage/Build/
 *.swp
 *.lock
 *.hmap
+
+# Xcode indexing and logs
+*.xcactivitylog
+*.xccheckout
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Swift Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Other common IDE files
+*.orig
