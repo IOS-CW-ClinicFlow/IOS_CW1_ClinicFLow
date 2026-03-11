@@ -50,8 +50,8 @@ enum HomeData {
 
     // ─── Labs ─────────────────────────────────────────────────────────────
     static let labs: [Lab] = [
-        Lab(name: "Blood Test", waitTime: "15 min", distance: "1.5km", rating: 4.8, imageName: "lab_blood"),
-        Lab(name: "MRI",        waitTime: "10 min", distance: "2.5km", rating: 4.6, imageName: "lab_mri"),
+        Lab(name: "Blood Test", waitTime: "15 min", distance: "1.5km", rating: 4.8, imageName: "lab_blood",slug: "blood-test"),
+        Lab(name: "MRI",        waitTime: "10 min", distance: "2.5km", rating: 4.6, imageName: "lab_mri",slug: "mri"),
     ]
 
     // ─── User location ────────────────────────────────────────────────────

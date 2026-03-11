@@ -4,6 +4,7 @@
 //
 //  Created by COBSCCOMP24.2P-019 on 2026-03-09.
 //
+
 import SwiftUI
 
 struct TopBar: View {
@@ -64,22 +65,30 @@ struct TopBar: View {
                 .buttonStyle(.plain)
 
             } else if showShare || showFavourite {
-                HStack(spacing: 4) {
+                HStack(spacing: 8) {
                     if showShare {
                         Button { onShare() } label: {
-                            Image(systemName: "square.and.arrow.up")
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundStyle(Color(hex: "#555555"))
-                                .frame(width: 36, height: 36)
+                            ZStack {
+                                Circle()
+                                    .fill(Color(hex: "#F2F2F7"))
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundStyle(Color(hex: "#555555"))
+                            }
                         }
                         .buttonStyle(.plain)
                     }
                     if showFavourite {
                         Button { onFavourite() } label: {
-                            Image(systemName: isFavourited ? "heart.fill" : "heart")
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundStyle(isFavourited ? Color(hex: "#FF5252") : Color(hex: "#555555"))
-                                .frame(width: 36, height: 36)
+                            ZStack {
+                                Circle()
+                                    .fill(Color(hex: "#F2F2F7"))
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: isFavourited ? "heart.fill" : "heart")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundStyle(isFavourited ? Color(hex: "#FF5252") : Color(hex: "#555555"))
+                            }
                         }
                         .buttonStyle(.plain)
                     }

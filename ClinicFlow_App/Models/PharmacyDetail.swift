@@ -26,6 +26,8 @@ struct PharmacyDetail: Identifiable, Equatable {
     let hours:      String
     let about:      String
     let badges:     [PharmacyChip]   // named 'badges' to avoid init collision with LabDetail
+    let phone:      String
+    let mapQuery:   String 
 
     static func == (lhs: PharmacyDetail, rhs: PharmacyDetail) -> Bool {
         lhs.name == rhs.name

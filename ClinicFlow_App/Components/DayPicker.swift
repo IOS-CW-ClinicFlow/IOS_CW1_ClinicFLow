@@ -31,7 +31,7 @@ struct DayPicker: View {
                         .padding(.horizontal, 14)
                         .padding(.vertical, 8)
                         .background(isSelected ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
-                        .clipShape(Capsule())
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }

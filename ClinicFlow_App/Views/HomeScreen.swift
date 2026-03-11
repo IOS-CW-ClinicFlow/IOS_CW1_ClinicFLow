@@ -4,7 +4,6 @@
 //
 //  Created by COBSCCOMP24.2P-019 on 2026-03-08.
 //
-//
 import SwiftUI
 
 struct HomeScreen: View {
@@ -22,10 +21,10 @@ struct HomeScreen: View {
     var body: some View {
         VStack(spacing: 0) {
 
-            // ── Fixed header (status bar + location + search never scroll) ──
+            // ── Fixed header ───────────────────────────────────────────────
             headerSection
 
-            // ── Only sections below search bar scroll ──────────────────────
+            // ── Scrollable content ─────────────────────────────────────────
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 22) {
                     appointmentSection
@@ -38,7 +37,6 @@ struct HomeScreen: View {
                 .padding(.bottom, 24)
             }
             .background(Color(hex: "#F4F6FB"))
-
         }
         .background(Color(hex: "#F4F6FB"))
     }
@@ -48,26 +46,21 @@ struct HomeScreen: View {
     private var headerSection: some View {
         VStack(spacing: 12) {
             HStack(alignment: .center) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Location")
-                        .font(.system(size: 11))
-                        .foregroundColor(Color(hex: "#aaaaaa"))
-                    HStack(spacing: 4) {
-                        Image(systemName: "mappin.circle.fill")
-                            .font(.system(size: 14))
-                            .foregroundColor(Color(hex: "#2a9df4"))
-                        Text("Colombo")
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(Color(hex: "#1a1a1a"))
-                        Image(systemName: "chevron.down")
-                            .font(.system(size: 11, weight: .semibold))
-                            .foregroundColor(Color(hex: "#555555"))
-                    }
-                }
-                Spacer()
-                HStack(spacing: 10) {
 
-                    // ── Bell (perfectly centred + red dot) ────────────────
+                // ── Greeting ───────────────────────────────────────────────
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Welcome 👋")
+                        .font(.system(size: 13))
+                        .foregroundColor(Color(hex: "#aaaaaa"))
+                    Text("Hi, Sandun!")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(Color(hex: "#1a1a1a"))
+                }
+
+                Spacer()
+
+                HStack(spacing: 10) {
+                    // ── Bell ──────────────────────────────────────────────
                     Button { onNotificationTap() } label: {
                         ZStack {
                             Circle()
@@ -76,7 +69,6 @@ struct HomeScreen: View {
                             Image(systemName: "bell.fill")
                                 .font(.system(size: 16))
                                 .foregroundColor(Color(hex: "#555555"))
-                            // Red dot top-right
                             Circle()
                                 .fill(Color(hex: "#F44336"))
                                 .frame(width: 9, height: 9)
@@ -86,7 +78,7 @@ struct HomeScreen: View {
                     }
                     .buttonStyle(.plain)
 
-                    // ── Language badge with dropdown ───────────────────────
+                    // ── Language badge ────────────────────────────────────
                     LanguageBadge()
                 }
             }
@@ -115,58 +107,58 @@ struct HomeScreen: View {
 
             Button { onViewAppointment() } label: {
                 VStack(spacing: 0) {
-                HStack(spacing: 12) {
-                    Circle()
-                        .fill(Color.white.opacity(0.3))
-                        .frame(width: 50, height: 50)
-                        .overlay(Image(systemName: "person.fill")
-                            .font(.system(size: 24))
-                            .foregroundColor(.white.opacity(0.8)))
-                        .overlay(Circle().stroke(Color.white.opacity(0.6), lineWidth: 2.5))
+                    HStack(spacing: 12) {
+                        Circle()
+                            .fill(Color.white.opacity(0.3))
+                            .frame(width: 50, height: 50)
+                            .overlay(Image(systemName: "person.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white.opacity(0.8)))
+                            .overlay(Circle().stroke(Color.white.opacity(0.6), lineWidth: 2.5))
 
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("Dr. Nayanathara")
-                            .font(.system(size: 16, weight: .heavy))
-                            .foregroundColor(.white)
-                        Text("Cardio Consultation")
-                            .font(.system(size: 13))
-                            .foregroundColor(.white.opacity(0.9))
-                    }
-                    Spacer()
-                    Button { onCallTap() } label: {
-                        ZStack {
-                            Circle().fill(Color.white).frame(width: 44, height: 44)
-                                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
-                            Image(systemName: "phone.fill")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color(hex: "#2ECC88"))
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Dr. Nayanathara")
+                                .font(.system(size: 16, weight: .heavy))
+                                .foregroundColor(.white)
+                            Text("Cardio Consultation")
+                                .font(.system(size: 13))
+                                .foregroundColor(.white.opacity(0.9))
                         }
+                        Spacer()
+                        Button { onCallTap() } label: {
+                            ZStack {
+                                Circle().fill(Color.white).frame(width: 44, height: 44)
+                                    .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
+                                Image(systemName: "phone.fill")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(Color(hex: "#2ECC88"))
+                            }
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
-                }
-                .padding(.horizontal, 18)
-                .padding(.vertical, 16)
+                    .padding(.horizontal, 18)
+                    .padding(.vertical, 16)
 
-                HStack(spacing: 0) {
-                    HStack(spacing: 7) {
-                        Image(systemName: "calendar").font(.system(size: 13)).foregroundColor(.white)
-                        Text("Monday, 25 Mar").font(.system(size: 13, weight: .medium)).foregroundColor(.white)
+                    HStack(spacing: 0) {
+                        HStack(spacing: 7) {
+                            Image(systemName: "calendar").font(.system(size: 13)).foregroundColor(.white)
+                            Text("Monday, 25 Mar").font(.system(size: 13, weight: .medium)).foregroundColor(.white)
+                        }
+                        .frame(maxWidth: .infinity)
+                        Rectangle().fill(Color.white.opacity(0.3)).frame(width: 1, height: 18)
+                        HStack(spacing: 7) {
+                            Image(systemName: "clock").font(.system(size: 13)).foregroundColor(.white)
+                            Text("09:00 - 10:00").font(.system(size: 13, weight: .medium)).foregroundColor(.white)
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                    .frame(maxWidth: .infinity)
-                    Rectangle().fill(Color.white.opacity(0.3)).frame(width: 1, height: 18)
-                    HStack(spacing: 7) {
-                        Image(systemName: "clock").font(.system(size: 13)).foregroundColor(.white)
-                        Text("09:00 - 10:00").font(.system(size: 13, weight: .medium)).foregroundColor(.white)
-                    }
-                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 18)
+                    .background(Color.black.opacity(0.18))
                 }
-                .padding(.vertical, 12)
-                .padding(.horizontal, 18)
-                .background(Color.black.opacity(0.18))
-            }
-            .background(Color(hex: "#2ECC88"))
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color(hex: "#2ECC88").opacity(0.4), radius: 24, x: 0, y: 6)
+                .background(Color(hex: "#2ECC88"))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .shadow(color: Color(hex: "#2ECC88").opacity(0.4), radius: 24, x: 0, y: 6)
             }
             .buttonStyle(.plain)
         }
@@ -181,8 +173,6 @@ struct HomeScreen: View {
                     .font(.system(size: 18, weight: .heavy))
                     .foregroundColor(Color(hex: "#1a1a1a"))
                 Spacer()
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Color(hex: "#2196F3"))
             }
             .padding(.bottom, 14)
 
@@ -230,8 +220,6 @@ struct HomeScreen: View {
                     ForEach(HomeData.doctors) { doctor in
                         Button { onDoctorTap(doctor) } label: {
                             VStack(spacing: 0) {
-
-                                // Image area
                                 ZStack(alignment: .bottomTrailing) {
                                     Color(hex: doctor.backgroundColorHex)
                                         .frame(height: 140)
@@ -240,8 +228,6 @@ struct HomeScreen: View {
                                         .scaledToFill()
                                         .frame(height: 140)
                                         .clipped()
-
-                                    // Rating badge
                                     HStack(spacing: 3) {
                                         Image(systemName: "star.fill")
                                             .font(.system(size: 10))
@@ -260,7 +246,6 @@ struct HomeScreen: View {
                                 .frame(height: 140)
                                 .clipped()
 
-                                // Name + credentials
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(doctor.name)
                                         .font(.system(size: 13, weight: .bold))
@@ -283,7 +268,7 @@ struct HomeScreen: View {
                         .buttonStyle(.plain)
                     }
                 }
-                .padding(.bottom, 4)   // room for shadow
+                .padding(.bottom, 4)
             }
         }
     }

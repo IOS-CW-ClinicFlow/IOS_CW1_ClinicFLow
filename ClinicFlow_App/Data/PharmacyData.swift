@@ -19,25 +19,12 @@ enum PharmacyData {
             PharmacyChip(label: "Certified",       colorHex: "#2196F3", iconName: "checkmark"),
             PharmacyChip(label: "HIPAA-compliant",  colorHex: "#2196F3", iconName: "shield"),
             PharmacyChip(label: "15-20 min",        colorHex: "#2196F3", iconName: "clock"),
-        ]
-    )
-
-    static let medPlus = PharmacyDetail(
-        name:      "MedPlus Pharmacy",
-        subtitle:  "Retail Pharmacy",
-        imageName: "pharmacy_2",
-        location:  "Block B, Level 1",
-        hours:     "Mon - Sat  |  09:00 AM - 10:00 PM",
-        about:     "MedPlus offers a wide range of prescription and over-the-counter medications with fast dispensing and professional pharmaceutical advice.",
-        badges: [
-            PharmacyChip(label: "Certified",       colorHex: "#2196F3", iconName: "checkmark"),
-            PharmacyChip(label: "HIPAA-compliant",  colorHex: "#2196F3", iconName: "shield"),
-            PharmacyChip(label: "10-15 min",        colorHex: "#2196F3", iconName: "clock"),
-        ]
+        ],
+        phone:    "+94112345100",
+        mapQuery: "ClinicFlow Pharmacy Colombo"
     )
 
     static let bySlug: [String: PharmacyDetail] = [
         "clinic-flow-pharmacy": clinicFlow,
-        "medplus-pharmacy":     medPlus,
     ]
 }

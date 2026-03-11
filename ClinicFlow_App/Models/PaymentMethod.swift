@@ -8,7 +8,6 @@ import Foundation
 
 enum PaymentMethod: String, CaseIterable, Identifiable {
     case card = "Add New Card"
-    case bank = "Bank Transfer"
     case cash = "Cash Payment"
 
     var id: String { rawValue }
@@ -16,7 +15,6 @@ enum PaymentMethod: String, CaseIterable, Identifiable {
     var iconName: String {
         switch self {
         case .card: return "creditcard"
-        case .bank: return "building.columns"
         case .cash: return "banknote"
         }
     }
@@ -24,7 +22,6 @@ enum PaymentMethod: String, CaseIterable, Identifiable {
     var iconColorHex: String {
         switch self {
         case .card: return "#2196F3"
-        case .bank: return "#37474F"
         case .cash: return "#4CAF50"
         }
     }
@@ -32,7 +29,7 @@ enum PaymentMethod: String, CaseIterable, Identifiable {
     var section: PaymentSection {
         switch self {
         case .card:         return .cardSection
-        case .bank, .cash:  return .otherSection
+        case .cash:  return .otherSection
         }
     }
 }
