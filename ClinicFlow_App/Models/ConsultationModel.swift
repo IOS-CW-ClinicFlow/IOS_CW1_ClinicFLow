@@ -23,4 +23,5 @@ struct LabTest: Identifiable {
     let name:     String
     let urgency:  LabTestUrgency
     let destination: String   // e.g. "ECG", "X-Ray"
+    let slug:        String
 }

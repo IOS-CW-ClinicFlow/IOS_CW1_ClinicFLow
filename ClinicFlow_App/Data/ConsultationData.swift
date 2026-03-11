@@ -16,7 +16,7 @@ struct ConsultationData {
     ]
 
     static let labTests: [LabTest] = [
-        LabTest(name: "ECG",   urgency: .urgent, destination: "ECG"),
-        LabTest(name: "X-Ray", urgency: .normal, destination: "XRay"),
+        LabTest(name: "ECG",   urgency: .urgent, destination: "ECG",slug: "ecg"),
+        LabTest(name: "X-Ray", urgency: .normal, destination: "XRay",slug: "xray"),
     ]
 }

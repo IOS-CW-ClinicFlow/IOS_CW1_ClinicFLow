@@ -4,12 +4,6 @@
 //
 //  Created by COBSCCOMP24.2P-019 on 2026-03-07.
 //
-//
-//  ContentView.swift
-//  ClinicFlow_App
-//
-//  Created by COBSCCOMP24.2P-019 on 2026-03-07.
-//
 import SwiftUI
 
 indirect enum AppScreen: Equatable {
@@ -38,12 +32,12 @@ indirect enum AppScreen: Equatable {
     case successScreen(SuccessInfo)
     case consultationComplete
     case profile
-    case labDetail(LabDetail)
+    case labDetail(LabDetail, from: AppScreen)
     case labPatientDetails(LabDetail, date: String, time: String)
     case labPayment(LabDetail, date: String, time: String)
     case labAddCard(LabDetail, date: String, time: String)
     case labReviewSummary(ReviewSummaryInfo)
-    case pharmacyDetail(PharmacyDetail)
+    case pharmacyDetail(PharmacyDetail, from: AppScreen)
     case pharmacySuccess(SuccessInfo)
 }
 
@@ -128,9 +122,7 @@ struct ContentView: View {
                             }
                         },
                         onCallTap: {
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                currentScreen = .call
-                            }
+                            withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .call }
                         },
                         onDoctorTap: { doctor in
                             if let detail = DoctorDetailData.bySlug[doctor.slug] {
@@ -139,16 +131,20 @@ struct ContentView: View {
                                 }
                             }
                         },
-                        onLabTap:      { _ in navigateToServices(tab: .lab) },
+                        onLabTap: { lab in
+                            if let detail = LabDetailData.bySlug[lab.slug] {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    currentScreen = .labDetail(detail, from: .home)
+                                }
+                            }
+                        },
                         onCategoryTap: { category in
                             switch category {
                             case .emergency:
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .emergency
-                            }
-                            case .doctors:   navigateToServices(tab: .doctor)
-                            case .labs:      navigateToServices(tab: .lab)
-                            case .pharmacy:  navigateToServices(tab: .pharmacy)
+                                withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .emergency }
+                            case .doctors:  navigateToServices(tab: .doctor)
+                            case .labs:     navigateToServices(tab: .lab)
+                            case .pharmacy: navigateToServices(tab: .pharmacy)
                             }
                         }
                     )
@@ -156,23 +152,17 @@ struct ContentView: View {
                 case .call:
                     CallScreen(
                         onEnd: {
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                currentScreen = .home
-                            }
+                            withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .home }
                         }
                     )
 
                 case .emergency:
                     EmergencyScreen(
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .home
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
                         },
-                        onCall: { actionType in
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                currentScreen = .call
-                            }
+                        onCall: { _ in
+                            withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .call }
                         }
                     )
 
@@ -192,14 +182,14 @@ struct ContentView: View {
                         onLabTap: { servicePlace in
                             if let lab = LabDetailData.bySlug[servicePlace.slug] {
                                 withAnimation(.easeInOut(duration: 0.3)) {
-                                    currentScreen = .labDetail(lab)
+                                    currentScreen = .labDetail(lab, from: .services)
                                 }
                             }
                         },
                         onPharmacyTap: { servicePlace in
                             if let pharmacy = PharmacyData.bySlug[servicePlace.slug] {
                                 withAnimation(.easeInOut(duration: 0.3)) {
-                                    currentScreen = .pharmacyDetail(pharmacy)
+                                    currentScreen = .pharmacyDetail(pharmacy, from: .services)
                                 }
                             }
                         },
@@ -245,14 +235,10 @@ struct ContentView: View {
                     AppointmentDetailScreen(
                         appointment: appt,
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = source
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = source }
                         },
                         onYourTurn: {
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                currentScreen = .yourTurn(appt)
-                            }
+                            withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .yourTurn(appt) }
                         }
                     )
 
@@ -265,23 +251,17 @@ struct ContentView: View {
                             }
                         },
                         onScanQR: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .qrScanner(appt)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .qrScanner(appt) }
                         }
                     )
 
                 case .qrScanner(let appt):
                     QRScannerScreen(
                         onCapture: {
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                currentScreen = .consultationComplete
-                            }
+                            withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .consultationComplete }
                         },
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .yourTurn(appt)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .yourTurn(appt) }
                         }
                     )
 
@@ -289,14 +269,11 @@ struct ContentView: View {
                     DoctorDetailScreen(
                         doctor: doctor,
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = source
-                            }
+                            if source == .services { servicesTab = .doctor }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = source }
                         },
                         onBook: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .bookAppointment(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .bookAppointment(doctor) }
                         }
                     )
 
@@ -309,53 +286,40 @@ struct ContentView: View {
                             }
                         },
                         onMakeAppointment: { _, _ in
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .selectPackage(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .selectPackage(doctor) }
                         }
                     )
 
                 case .selectPackage(let doctor):
                     SelectPackageScreen(
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .bookAppointment(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .bookAppointment(doctor) }
                         },
                         onNext: { _ in
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .patientDetails(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .patientDetails(doctor) }
                         }
                     )
 
                 case .patientDetails(let doctor):
                     PatientDetailsScreen(
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .selectPackage(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .selectPackage(doctor) }
                         },
                         onNext: { _ in
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .payment(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .payment(doctor) }
                         }
                     )
 
                 case .payment(let doctor):
                     PaymentScreen(
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .patientDetails(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .patientDetails(doctor) }
                         },
                         onNext: { method in
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 if method == .card {
                                     currentScreen = .addCard(doctor)
                                 } else {
-                                    // bank or cash → skip card entry, go straight to review
                                     let info = ReviewSummaryInfo(
                                         context:       .doctor(doctor),
                                         dateAndHour:   "October 4, 2026 | 07:00 PM",
@@ -373,9 +337,7 @@ struct ContentView: View {
                 case .addCard(let doctor):
                     AddCardScreen(
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .payment(doctor)
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .payment(doctor) }
                         },
                         onAddCard: { _ in
                             withAnimation(.easeInOut(duration: 0.3)) {
@@ -411,24 +373,14 @@ struct ContentView: View {
                         },
                         onPay: {
                             withAnimation(.easeInOut(duration: 0.3)) {
-                                // Card → Payment Success first, then Booking Success
-                                // Cash/bank → Booking Success directly
+                                let entityName: String
+                                if case .doctor(let d) = info.context { entityName = d.name }
+                                else if case .lab(let n, _) = info.context { entityName = n }
+                                else { entityName = "" }
                                 if info.paymentMethod == .card {
-                                    let entityName: String
-                                    if case .doctor(let d) = info.context { entityName = d.name }
-                                    else if case .lab(let n, _) = info.context { entityName = n }
-                                    else { entityName = "" }
-                                    currentScreen = .successScreen(
-                                        SuccessData.doctorPayment(entityName: entityName)
-                                    )
+                                    currentScreen = .successScreen(SuccessData.doctorPayment(entityName: entityName))
                                 } else {
-                                    let entityName: String
-                                    if case .doctor(let d) = info.context { entityName = d.name }
-                                    else if case .lab(let n, _) = info.context { entityName = n }
-                                    else { entityName = "" }
-                                    currentScreen = .successScreen(
-                                        SuccessData.doctorBooking(entityName: entityName)
-                                    )
+                                    currentScreen = .successScreen(SuccessData.doctorBooking(entityName: entityName))
                                 }
                             }
                         },
@@ -445,63 +397,67 @@ struct ContentView: View {
                     SuccessScreen(
                         info: info,
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .home
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
                         },
                         onViewAppointment: {
                             withAnimation(.easeInOut(duration: 0.3)) {
-                                // If this was paymentSuccess, next step is bookingSuccess
                                 switch info.kind {
                                 case .paymentSuccess:
-                                    currentScreen = .successScreen(
-                                        SuccessData.doctorBooking(entityName: info.entityName)
-                                    )
+                                    currentScreen = .successScreen(SuccessData.doctorBooking(entityName: info.entityName))
                                 case .labPaymentSuccess:
-                                    currentScreen = .successScreen(
-                                        SuccessData.labBooking(entityName: info.entityName)
-                                    )
+                                    currentScreen = .successScreen(SuccessData.labBooking(entityName: info.entityName))
                                 default:
                                     currentScreen = .appointments
                                 }
                             }
                         },
                         onGoHome: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .home
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
                         }
                     )
 
                 case .consultationComplete:
                     ConsultationCompleteScreen(
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .home
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
+                        },
+                        onGoPharmacy: {
+                            if let pharmacy = PharmacyData.bySlug["clinic-flow-pharmacy"] {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    currentScreen = .pharmacyDetail(pharmacy, from: .consultationComplete)
+                                }
+                            }
+                        },
+                        onGoLabTest: { test in
+                            if let lab = LabDetailData.bySlug[test.slug] {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    currentScreen = .labDetail(lab, from: .consultationComplete)
+                                }
                             }
                         }
                     )
 
-                case .labDetail(let lab):
+                case .labDetail(let lab, let source):
                     LabDetailScreen(
                         lab: lab,
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .services
-                            }
+                            if source == .services { servicesTab = .lab }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = source }
                         },
                         onBook: { lab, date, time in
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 currentScreen = .labPatientDetails(lab, date: date, time: time)
                             }
-                        }
+                        },
+                        onCall: { withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .call } },
+                        onMap:  { withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .map  } }
                     )
 
                 case .labPatientDetails(let lab, date: let date, time: let time):
                     PatientDetailsScreen(
                         onBack: {
                             withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .labDetail(lab)
+                                currentScreen = .labDetail(lab, from: .services)
                             }
                         },
                         onNext: { _ in
@@ -598,13 +554,12 @@ struct ContentView: View {
                         }
                     )
 
-                case .pharmacyDetail(let pharmacy):
+                case .pharmacyDetail(let pharmacy, let source):
                     PharmacyScreen(
                         pharmacy: pharmacy,
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .services
-                            }
+                            if source == .services { servicesTab = .pharmacy }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = source }
                         },
                         onOrder: { pharmacy in
                             withAnimation(.easeInOut(duration: 0.3)) {
@@ -612,33 +567,28 @@ struct ContentView: View {
                                     SuccessData.pharmacyOrderConfirmed(entityName: pharmacy.name)
                                 )
                             }
-                        }
+                        },
+                        onCall: { withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .call } },
+                        onMap:  { withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .map  } }
                     )
 
                 case .pharmacySuccess(let info):
                     SuccessScreen(
                         info: info,
                         onBack: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .home
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
                         },
                         onViewAppointment: {
                             withAnimation(.easeInOut(duration: 0.3)) {
-                                // pharmacyOrderConfirmed → pharmacyOrderComplete
                                 if info.kind == .pharmacyOrderConfirmed {
-                                    currentScreen = .pharmacySuccess(
-                                        SuccessData.pharmacyOrderComplete()
-                                    )
+                                    currentScreen = .pharmacySuccess(SuccessData.pharmacyOrderComplete())
                                 } else {
                                     currentScreen = .home
                                 }
                             }
                         },
                         onGoHome: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentScreen = .home
-                            }
+                            withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
                         }
                     )
 
