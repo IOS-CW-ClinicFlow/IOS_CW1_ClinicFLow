@@ -1,13 +1,13 @@
 //
-//  LabChipView.swift
+//  PharmacyChipView.swift
 //  ClinicFlow_App
 //
-//  Created by COBSCCOMP242P-051 on 2026-03-10.
+//  Created by COBSCCOMP242P-051 on 2026-03-11.
 //
 import SwiftUI
 
-struct LabChipView: View {
-    let chip: LabChip
+struct PharmacyChipView: View {
+    let chip: PharmacyChip
 
     var body: some View {
         HStack(spacing: 5) {
