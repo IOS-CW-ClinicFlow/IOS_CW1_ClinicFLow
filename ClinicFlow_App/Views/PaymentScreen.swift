@@ -4,6 +4,7 @@
 //
 //  Created by COBSCCOMP24.2P-051 on 2026-03-10.
 //
+
 import SwiftUI
 
 struct PaymentScreen: View {
@@ -48,24 +49,15 @@ struct PaymentScreen: View {
                     .fill(Color(hex: "#F2F2F7"))
                     .frame(height: 1)
 
-                Button { onNext(selected) } label: {
-                    Text("Next")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Color(hex: "#2196F3"))
-                        .clipShape(Capsule())
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.4),
-                                radius: 16, x: 0, y: 4)
-                }
-                .buttonStyle(.plain)
+                PrimaryButton(title: "Next") { onNext(selected) }
+                .padding(.top, 16)
+                .padding(.bottom, 32)
                 .padding(.horizontal, 18)
-                .padding(.vertical, 16)
             }
             .background(Color.white)
         }
         .background(Color(hex: "#F4F6FB"))
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 

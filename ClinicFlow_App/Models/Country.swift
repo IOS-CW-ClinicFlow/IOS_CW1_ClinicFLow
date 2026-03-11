@@ -1,7 +1,11 @@
+//
+//  Country.swift
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//
 import Foundation
 
-/// Represents a country in the phone picker component.
-/// Moved out of the view file so it can be shared and tested independently.
 struct Country: Identifiable, Equatable, Hashable {
     let id = UUID()
     let name: String
