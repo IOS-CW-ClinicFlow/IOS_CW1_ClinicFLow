@@ -30,7 +30,9 @@ enum LabDetailData {
             LabSlot(day: "Tue",   date: "6 Oct"),
             LabSlot(day: "Wed",   date: "7 Oct"),
         ],
-        times: ["7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"]
+        times: ["7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"],
+        phone:      "+94112345001",
+        mapQuery:   "National Hospital Colombo X-Ray"
     )
 
     static let ctScan = LabDetail(
@@ -55,7 +57,9 @@ enum LabDetailData {
             LabSlot(day: "Tue",   date: "6 Oct"),
             LabSlot(day: "Wed",   date: "7 Oct"),
         ],
-        times: ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM"]
+        times: ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM"],
+        phone:      "+94112345002",
+        mapQuery:   "National Hospital Colombo CT Scan"
     )
 
     static let bloodTest = LabDetail(
@@ -80,13 +84,71 @@ enum LabDetailData {
             LabSlot(day: "Tue",   date: "6 Oct"),
             LabSlot(day: "Wed",   date: "7 Oct"),
         ],
-        times: ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM"]
+        times: ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM"],
+        phone:      "+94112345003",
+        mapQuery:   "National Hospital Colombo Blood Test"
     )
 
-    // ── Lookup by slug (matches ServicePlace.slug in ServicesData) ─────────
+    static let mri = LabDetail(
+        name:       "MRI Scan",
+        subtitle:   "Radiology, Soft Tissue",
+        imageName:  "lab_mri",
+        location:   "Level 1, A-Wing",
+        hours:      "Mon - Sat  |  08:00 AM - 06:00 PM",
+        about:      "Our MRI unit uses high-field magnetic resonance imaging to produce detailed images of soft tissues, joints, and the brain — with no ionising radiation.",
+        serviceFee: "Rs. 6,500",
+        chips: [
+            LabChip(label: "Certified",      colorHex: "#2196F3", iconName: "checkmark"),
+            LabChip(label: "HIPAA-compliant", colorHex: "#2196F3", iconName: "shield"),
+            LabChip(label: "45-60 min",       colorHex: "#2196F3", iconName: "clock"),
+            LabChip(label: "No Metal",        colorHex: "#F44336", iconName: "exclamationmark.circle"),
+            LabChip(label: "Online Results",  colorHex: "#00897B", iconName: "desktopcomputer"),
+            LabChip(label: "Within 24hrs",    colorHex: "#2196F3", iconName: "clock"),
+        ],
+        slots: [
+            LabSlot(day: "Today", date: "4 Oct"),
+            LabSlot(day: "Mon",   date: "5 Oct"),
+            LabSlot(day: "Tue",   date: "6 Oct"),
+            LabSlot(day: "Wed",   date: "7 Oct"),
+        ],
+        times: ["8:00 AM", "9:00 AM", "11:00 AM", "2:00 PM"],
+        phone:      "+94112345004",
+        mapQuery:   "National Hospital Colombo MRI"
+    )
+
+    static let ecg = LabDetail(
+        name:       "ECG",
+        subtitle:   "Cardiology, Cardiac Monitoring",
+        imageName:  "lab_blood",
+        location:   "Level 1, Cardiac Unit",
+        hours:      "Mon - Sun  |  07:00 AM - 09:00 PM",
+        about:      "Our ECG unit provides fast electrocardiogram recordings to detect heart rhythm abnormalities, arrhythmias, and cardiac conditions with immediate results.",
+        serviceFee: "Rs. 800",
+        chips: [
+            LabChip(label: "Certified",      colorHex: "#2196F3", iconName: "checkmark"),
+            LabChip(label: "HIPAA-compliant", colorHex: "#2196F3", iconName: "shield"),
+            LabChip(label: "5-10 min",        colorHex: "#2196F3", iconName: "clock"),
+            LabChip(label: "No Prep",         colorHex: "#4CAF50", iconName: "checkmark.circle"),
+            LabChip(label: "Instant Results", colorHex: "#00897B", iconName: "desktopcomputer"),
+            LabChip(label: "Immediate",       colorHex: "#F44336", iconName: "exclamationmark.circle"),
+        ],
+        slots: [
+            LabSlot(day: "Today", date: "4 Oct"),
+            LabSlot(day: "Mon",   date: "5 Oct"),
+            LabSlot(day: "Tue",   date: "6 Oct"),
+            LabSlot(day: "Wed",   date: "7 Oct"),
+        ],
+        times: ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM"],
+        phone:      "+94112345005",
+        mapQuery:   "National Hospital Colombo ECG"
+    )
+
+    // ── Lookup by slug ─────────────────────────────────────────────────────
     static let bySlug: [String: LabDetail] = [
         "xray":       xRay,
         "ct-scan":    ctScan,
         "blood-test": bloodTest,
+        "mri":        mri,
+        "ecg":        ecg,
     ]
 }

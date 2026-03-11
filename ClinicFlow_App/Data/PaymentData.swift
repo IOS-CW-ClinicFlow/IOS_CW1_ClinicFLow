@@ -8,6 +8,6 @@ import Foundation
 
 enum PaymentData {
     static let cardMethods:  [PaymentMethod] = [.card]
-    static let otherMethods: [PaymentMethod] = [.bank, .cash]
+    static let otherMethods: [PaymentMethod] = [.cash]
     static let defaultMethod: PaymentMethod  = .card
 }

@@ -58,26 +58,37 @@ struct HeroView: View {
 
                     Spacer()
 
-                    HStack(spacing: 4) {
+                    HStack(spacing: 8) {
                         Button(action: onShare) {
-                            Image(systemName: "square.and.arrow.up")
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundStyle(Color(hex: "#555555"))
-                                .frame(width: 36, height: 36)
+                            ZStack {
+                                Circle()
+                                    .fill(Color(hex: "#F2F2F7"))
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundStyle(Color(hex: "#555555"))
+                                    .frame(width: 36, height: 36)
+                            }
+                            
                         }
                         .buttonStyle(.plain)
 
                         Button(action: onFavourite) {
-                            Image(systemName: isFavourited ? "heart.fill" : "heart")
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundStyle(isFavourited ? Color(hex: "#FF5252") : Color(hex: "#555555"))
-                                .frame(width: 36, height: 36)
+                            ZStack {
+                                Circle()
+                                    .fill(Color(hex: "#F2F2F7"))
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: isFavourited ? "heart.fill" : "heart")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundStyle(isFavourited ? Color(hex: "#FF5252") : Color(hex: "#555555"))
+                                    .frame(width: 36, height: 36)
+                            }
                         }
                         .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal, 18)
-                .padding(.top, topInset + 12) // safe area + same 12pt as TopBar
+                .padding(.top, topInset + 75)
             }
         }
         .frame(height: 220)
