@@ -21,23 +21,20 @@ struct LabDayPicker: View {
                     } label: {
                         VStack(spacing: 2) {
                             Text(slot.day)
-                                .font(.system(size: 11, weight: .semibold))
+                                .font(.system(size: 10, weight: .semibold))
                             Text(slot.date)
                                 .font(.system(size: 12, weight: .bold))
                         }
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 8)
-                        .background(selectedIndex == index
-                                    ? Color(hex: "#2196F3")
-                                    : Color(hex: "#F4F6FB"))
-                        .foregroundStyle(selectedIndex == index
-                                         ? Color.white
-                                         : Color(hex: "#555555"))
-                        .clipShape(Capsule())
+                        .foregroundStyle(selectedIndex == index ? Color.white : Color(hex: "#555555"))
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 11)
+                        .background(selectedIndex == index ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
             }
+            .padding(.bottom, 4)
         }
     }
 }
@@ -57,19 +54,16 @@ struct LabTimePicker: View {
                     } label: {
                         Text(time)
                             .font(.system(size: 13, weight: .bold))
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 10)
-                            .background(selectedIndex == index
-                                        ? Color(hex: "#2196F3")
-                                        : Color(hex: "#F4F6FB"))
-                            .foregroundStyle(selectedIndex == index
-                                             ? Color.white
-                                             : Color(hex: "#555555"))
-                            .clipShape(Capsule())
+                            .foregroundStyle(selectedIndex == index ? Color.white : Color(hex: "#555555"))
+                            .padding(.horizontal, 18)
+                            .padding(.vertical, 11)
+                            .background(selectedIndex == index ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
             }
+            .padding(.bottom, 4)
         }
     }
 }
