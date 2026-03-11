@@ -31,6 +31,8 @@ struct LabDetail: Identifiable, Equatable {
     let chips:      [LabChip]
     let slots:      [LabSlot]
     let times:      [String]
+    let phone:      String
+    let mapQuery:   String
 
     static func == (lhs: LabDetail, rhs: LabDetail) -> Bool {
         lhs.name == rhs.name

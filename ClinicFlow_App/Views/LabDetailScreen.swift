@@ -4,11 +4,6 @@
 //
 //  Created by COBSCCOMP242P-051 on 2026-03-10.
 //
-//
-//
-//  LabDetailScreen.swift
-//  ClinicFlow_App
-
 import SwiftUI
 
 struct LabDetailScreen: View {
