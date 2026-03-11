@@ -27,7 +27,7 @@ struct TimePicker: View {
                             .padding(.horizontal, 18)
                             .padding(.vertical, 11)
                             .background(isSelected ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
-                            .clipShape(Capsule())
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
