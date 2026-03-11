@@ -28,8 +28,8 @@ struct DayPicker: View {
                                 .font(.system(size: 12, weight: .bold))
                         }
                         .foregroundStyle(isSelected ? .white : Color(hex: "#555555"))
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 8)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 11)
                         .background(isSelected ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }

@@ -73,7 +73,7 @@ struct HomeScreen: View {
                                 .fill(Color(hex: "#F44336"))
                                 .frame(width: 9, height: 9)
                                 .overlay(Circle().stroke(Color(hex: "#F2F2F7"), lineWidth: 1.5))
-                                .offset(x: 10, y: -10)
+                                .offset(x: 7, y: -7)
                         }
                     }
                     .buttonStyle(.plain)

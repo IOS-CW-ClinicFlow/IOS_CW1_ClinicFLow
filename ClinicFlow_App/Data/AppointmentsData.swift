@@ -48,13 +48,6 @@ struct AppointmentsData {
                     avatarName: "doctor_male",
                     status: .upcoming, remindMe: true),
 
-        Appointment(doctorName: "Dr. Amila Herath",
-                    specialty:  "Internal Medicine",
-                    date: "Apr 2, 2026", time: "10:00 AM",
-                    location: "Floor 3, Room 4",
-                    bookingId: "#DR4S2SA54",
-                    avatarName: "doctor_female",
-                    status: .upcoming, remindMe: false),
 
         // ── Completed ──────────────────────────────────────────────────────
         Appointment(doctorName: "Dr. Jayaani Dennis",
@@ -73,13 +66,6 @@ struct AppointmentsData {
                     avatarName: "doc_sarath",
                     status: .completed),
 
-        Appointment(doctorName: "Dr. Ruwini Maleesha",
-                    specialty:  "Dermatology",
-                    date: "Apr 15, 2025", time: "10:00 AM",
-                    location: "Floor 1, Room 3",
-                    bookingId: "#DR4S2SA54",
-                    avatarName: "doctor_female",
-                    status: .completed),
 
         // ── Cancelled ──────────────────────────────────────────────────────
         Appointment(doctorName: "Dr. Ryan De Silva",
@@ -98,12 +84,5 @@ struct AppointmentsData {
                     avatarName: "doctor_female",
                     status: .cancelled),
 
-        Appointment(doctorName: "Dr. Sarath Fernando",
-                    specialty:  "Dentistry",
-                    date: "Aug 25, 2025", time: "10:00 AM",
-                    location: "Floor 3, Room 1",
-                    bookingId: "#DR4S2SA54",
-                    avatarName: "doc_sarath",
-                    status: .cancelled),
     ]
 }
