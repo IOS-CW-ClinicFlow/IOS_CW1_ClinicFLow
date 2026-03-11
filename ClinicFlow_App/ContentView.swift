@@ -604,6 +604,7 @@ struct ContentView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.35), value: currentScreen)
+            .ignoresSafeArea(edges: .bottom)
 
             if showBottomNav {
                 BottomNav(activeTab: activeTabLabel) { tab in

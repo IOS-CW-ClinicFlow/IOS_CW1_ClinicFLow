@@ -1,6 +1,11 @@
+//
+//  User.swift
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//
 import Foundation
 
-/// Simple user model used during sign-up/login flows.
 struct User {
     var fullName: String
     var email: String

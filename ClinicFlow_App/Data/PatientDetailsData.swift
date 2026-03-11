@@ -4,10 +4,6 @@
 //
 //  Created by cobsccomp24.2p-021 on 2026-03-10.
 //
-//
-//  PatientDetailsData.swift
-//  ClinicFlow_App
-
 import Foundation
 
 struct PatientDetailsData {

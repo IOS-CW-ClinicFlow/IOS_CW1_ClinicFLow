@@ -2,11 +2,8 @@
 //  BackButton.swift
 //  ClinicFlow_App
 //
-//  A reusable back button used across authentication screens.
-//  Wraps the `BackArrowIcon` inside a plain-styled button with
-//  consistent padding and hit area.
+//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
 //
-
 import SwiftUI
 
 struct BackButton: View {
