@@ -25,6 +25,5 @@ enum ServicesData {
     // ── Pharmacies ────────────────────────────────────────────────────────
     static let pharmacies: [ServicePlace] = [
         ServicePlace(name: "Clinic Flow Pharmacy", category: "Internal Drugstore", location: "Aura Building, Ground Floor", hours: "Mon - Sun | 08:00 AM - 11:00 PM", isOpen: true, imageName: "pharmacy_1", slug: "clinic-flow-pharmacy"),
-        ServicePlace(name: "MedPlus Pharmacy",     category: "Retail Pharmacy",    location: "Block B, Level 1",           hours: "Mon - Sat | 09:00 AM - 10:00 PM", isOpen: true, imageName: "pharmacy_2", slug: "medplus-pharmacy"),
     ]
 }
