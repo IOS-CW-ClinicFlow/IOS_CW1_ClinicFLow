@@ -110,23 +110,15 @@ struct DoctorDetailScreen: View {
                     .fill(Color(hex: "#F2F2F7"))
                     .frame(height: 1)
 
-                Button { onBook() } label: {
-                    Text("Book Appointment")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Color(hex: "#2196F3"))
-                        .clipShape(Capsule())
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.4), radius: 16, x: 0, y: 4)
-                }
-                .buttonStyle(.plain)
+                PrimaryButton(title: "Book Appointment", action: onBook)
                 .padding(.horizontal, 20)
-                .padding(.vertical, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 32)
             }
             .background(Color.white)
         }
         .background(Color.white)
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 

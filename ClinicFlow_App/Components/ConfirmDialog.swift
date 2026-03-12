@@ -15,7 +15,7 @@ struct ConfirmDialog: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .alert(title, isPresented: $isPresented) {
+            .confirmationDialog(title, isPresented: $isPresented, titleVisibility: .visible) {
                 Button(confirmLabel, role: .destructive) { onConfirm() }
                 Button("Cancel", role: .cancel) {}
             } message: {

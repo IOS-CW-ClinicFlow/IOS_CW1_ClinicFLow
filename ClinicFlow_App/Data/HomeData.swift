@@ -26,7 +26,7 @@ enum HomeData {
             name:               "Dr. Ryan De Silva",
             credentials:        "MBBS, MD Cardiology",
             rating:             4.9,
-            imageName:          "doc_ryan",
+            imageName:          "doc5",
             backgroundColorHex: "#D6E8F5",
             slug:               "ryan-de-silva"
         ),
@@ -34,7 +34,7 @@ enum HomeData {
             name:               "Dr. Jayaani Dennis",
             credentials:        "MBBS, MSc Physiology",
             rating:             4.8,
-            imageName:          "doc_jayaani",
+            imageName:          "doc3",
             backgroundColorHex: "#E8E8F2",
             slug:               "jayaani-dennis"
         ),
@@ -42,7 +42,7 @@ enum HomeData {
             name:               "Dr. Sarath Fernando",
             credentials:        "BDS, MDS Dentistry",
             rating:             4.7,
-            imageName:          "doc_sarath",
+            imageName:          "doc7",
             backgroundColorHex: "#D6F5E8",
             slug:               "sarath-fernando"
         ),
@@ -50,8 +50,8 @@ enum HomeData {
 
     // ─── Labs ─────────────────────────────────────────────────────────────
     static let labs: [Lab] = [
-        Lab(name: "Blood Test", waitTime: "15 min", distance: "1.5km", rating: 4.8, imageName: "lab_blood",slug: "blood-test"),
-        Lab(name: "MRI",        waitTime: "10 min", distance: "2.5km", rating: 4.6, imageName: "lab_mri",slug: "mri"),
+        Lab(name: "Blood Test", waitTime: "15 min", distance: "1.5km", rating: 4.8, imageName: "lab-blood3",slug: "blood-test"),
+        Lab(name: "MRI",        waitTime: "10 min", distance: "2.5km", rating: 4.6, imageName: "lab-MRI4",slug: "mri"),
     ]
 
     // ─── User location ────────────────────────────────────────────────────

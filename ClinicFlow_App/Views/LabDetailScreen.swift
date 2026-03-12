@@ -178,22 +178,12 @@ struct LabDetailScreen: View {
                     .fill(Color(hex: "#F2F2F7"))
                     .frame(height: 1)
 
-                Button {
+                PrimaryButton(title: "Book Appointment") {
                     onBook(lab, selectedDate, selectedTimeStr)
-                } label: {
-                    Text("Book Appointment")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Color(hex: "#2196F3"))
-                        .clipShape(Capsule())
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.4),
-                                radius: 16, x: 0, y: 4)
                 }
-                .buttonStyle(.plain)
                 .padding(.horizontal, 20)
-                .padding(.vertical, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 32)
             }
             .background(Color.white)
         }

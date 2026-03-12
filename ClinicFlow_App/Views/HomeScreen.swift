@@ -111,10 +111,17 @@ struct HomeScreen: View {
                         Circle()
                             .fill(Color.white.opacity(0.3))
                             .frame(width: 50, height: 50)
-                            .overlay(Image(systemName: "person.fill")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white.opacity(0.8)))
-                            .overlay(Circle().stroke(Color.white.opacity(0.6), lineWidth: 2.5))
+                            .overlay(
+                                Image("doc1") 
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 44, height: 44)
+                                    .clipShape(Circle())
+                            )
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white.opacity(0.6), lineWidth: 2.5)
+                            )
 
                         VStack(alignment: .leading, spacing: 3) {
                             Text("Dr. Nayanathara")

@@ -2,7 +2,7 @@
 //  Appointment.swift
 //  ClinicFlow_App
 //
-//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
+//  Created by cobsccomp24.2p-021 on 2026-03-08.
 //
 import Foundation
 
@@ -23,6 +23,7 @@ struct Appointment: Identifiable, Equatable {
     let avatarName:  String
     let status:      AppointmentStatus
     var remindMe:    Bool = false
+    var doctorSlug:  String = ""   // links to DoctorDetailData.bySlug
 
     // Exclude auto-generated id from equality so two appointments
     // with the same data are considered equal regardless of UUID

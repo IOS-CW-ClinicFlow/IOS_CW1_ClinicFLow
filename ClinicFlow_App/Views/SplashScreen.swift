@@ -4,12 +4,7 @@
 //
 //  Created by COBSCCOMP24.2P-019 on 2026-03-08.
 //
-//
-//  SplashScreen.swift
-//  ClinicFlow_App
-//
-//  Created by COBSCCOMP24.2P-019 on 2026-03-08.
-//
+
 import SwiftUI
 
 struct SplashScreen: View {
