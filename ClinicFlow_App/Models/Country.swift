@@ -16,7 +16,7 @@ struct Country: Identifiable, Equatable, Hashable {
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
     static func == (lhs: Country, rhs: Country) -> Bool { lhs.id == rhs.id }
 
-    static let defaultCountry = Country(name: "Sri Lanka", dialCode: "94", flag: "🇱🇰", maxDigits: 12)
+    static let defaultCountry = Country(name: "Sri Lanka", dialCode: "94", flag: "🇱🇰", maxDigits: 9)
     static let all: [Country] = [
         defaultCountry,
         Country(name: "United States",   dialCode: "1",   flag: "🇺🇸", maxDigits: 10),
