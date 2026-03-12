@@ -48,10 +48,17 @@ enum SuccessKind: Equatable {
 
     var primaryButtonLabel: String {
         switch self {
-        case .paymentSuccess, .labPaymentSuccess:   return "Next"          // → goes to BookingSuccess
-        case .bookingConfirm, .labBookingConfirm:   return "View Booking"  // → goes to Appointments
-        case .pharmacyOrderConfirmed,
-             .pharmacyOrderComplete:                return "View Order"
+        case .paymentSuccess, .labPaymentSuccess:
+            return "Next"
+
+        case .bookingConfirm, .labBookingConfirm:
+            return "View Booking"
+
+        case .pharmacyOrderConfirmed:
+            return "View Order"
+
+        case .pharmacyOrderComplete:
+            return "Go to Collect"
         }
     }
 

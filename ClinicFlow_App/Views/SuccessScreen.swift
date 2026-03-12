@@ -57,7 +57,7 @@ struct SuccessScreen: View {
                     Button(action: onGoHome) {
                         Text("Go to Home")
                             .font(.system(size: 14, weight: .bold))
-                            .foregroundStyle(Color(hex: "#2196F3"))
+                            .foregroundStyle(Color(hex: "#1A8FD1"))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 12)
                     }

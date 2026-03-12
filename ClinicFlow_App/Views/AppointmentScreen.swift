@@ -155,9 +155,9 @@ struct AppointmentsScreen: View {
             Button { showFilter = true } label: {
                 ZStack(alignment: .topTrailing) {
                     RoundedRectangle(cornerRadius: 11)
-                        .fill(Color(hex: "#2196F3"))
+                        .fill(Color(hex: "#1A8FD1"))
                         .frame(width: 42, height: 42)
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.38), radius: 12, x: 0, y: 4)
+                        .shadow(color: Color(hex: "#1A8FD1").opacity(0.38), radius: 12, x: 0, y: 4)
                     Image(systemName: "slider.horizontal.3")
                         .font(.system(size: 17, weight: .medium))
                         .foregroundColor(.white)
@@ -166,7 +166,7 @@ struct AppointmentsScreen: View {
                         Circle()
                             .fill(Color(hex: "#F44336"))
                             .frame(width: 9, height: 9)
-                            .overlay(Circle().stroke(Color(hex: "#2196F3"), lineWidth: 1.5))
+                            .overlay(Circle().stroke(Color(hex: "#1A8FD1"), lineWidth: 1.5))
                             .offset(x: 2, y: -2)
                     }
                 }
@@ -194,10 +194,10 @@ struct AppointmentsScreen: View {
                     VStack(spacing: 0) {
                         Text(tab.rawValue)
                             .font(.system(size: 13, weight: isActive ? .bold : .medium))
-                            .foregroundColor(isActive ? Color(hex: "#2196F3") : Color(hex: "#AAAAAA"))
+                            .foregroundColor(isActive ? Color(hex: "#1A8FD1") : Color(hex: "#AAAAAA"))
                             .padding(.vertical, 10)
                         Rectangle()
-                            .fill(isActive ? Color(hex: "#2196F3") : Color.clear)
+                            .fill(isActive ? Color(hex: "#1A8FD1") : Color.clear)
                             .frame(height: 2.5)
                     }
                 }
@@ -231,7 +231,7 @@ struct AppointmentsScreen: View {
                 } label: {
                     Text("Clear Filters")
                         .font(.system(size: 13, weight: .semibold))
-                        .foregroundColor(Color(hex: "#2196F3"))
+                        .foregroundColor(Color(hex: "#1A8FD1"))
                         .padding(.horizontal, 20).padding(.vertical, 8)
                         .background(Color(hex: "#EAF4FE"))
                         .clipShape(Capsule())
@@ -268,7 +268,7 @@ struct AppointmentsScreen: View {
                                             .font(.system(size: 12, weight: .semibold))
                                             .foregroundColor(isOn ? .white : Color(hex: "#555555"))
                                             .padding(.horizontal, 14).padding(.vertical, 8)
-                                            .background(isOn ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
+                                            .background(isOn ? Color(hex: "#1A8FD1") : Color(hex: "#F4F6FB"))
                                             .clipShape(Capsule())
                                             .overlay(Capsule().stroke(isOn ? Color.clear : Color(hex: "#E0E0EE"), lineWidth: 1.5))
                                     }
@@ -300,7 +300,7 @@ struct AppointmentsScreen: View {
                             displayedComponents: .date
                         )
                         .datePickerStyle(.graphical)
-                        .tint(Color(hex: "#2196F3"))
+                        .tint(Color(hex: "#1A8FD1"))
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 14))
                     }

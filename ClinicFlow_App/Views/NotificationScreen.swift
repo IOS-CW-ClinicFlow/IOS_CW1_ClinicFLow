@@ -54,9 +54,9 @@ struct NotificationsScreen: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
-                .background(Color(hex: "#2196F3"))
+                .background(Color(hex: "#1A8FD1"))
                 .clipShape(Capsule())
-                .shadow(color: Color(hex: "#2196F3").opacity(0.38), radius: 14, x: 0, y: 4)
+                .shadow(color: Color(hex: "#1A8FD1").opacity(0.38), radius: 14, x: 0, y: 4)
         }
         .buttonStyle(.plain)
         .padding(.horizontal, 16)
