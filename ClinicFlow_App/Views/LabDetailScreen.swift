@@ -3,7 +3,7 @@
 //  ClinicFlow_App
 //
 //  Created by COBSCCOMP242P-051 on 2026-03-10.
-//
+
 import SwiftUI
 
 struct LabDetailScreen: View {
@@ -93,21 +93,22 @@ struct LabDetailScreen: View {
                     }
                     .padding(.bottom, 16)
 
-                    Divider().padding(.bottom, 14)
+                    Divider().padding(.bottom, 15)
 
                     // About
                     Text("About")
                         .font(.system(size: 14, weight: .bold))
                         .foregroundStyle(Color(hex: "#1a1a1a"))
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 7)
 
                     aboutText
                         .font(.system(size: 12))
                         .lineSpacing(4)
+                        .padding(.bottom, 12)
                         .onTapGesture { showFullAbout.toggle() }
 
                     // Chips
-                    FlowLayout(spacing: 7) {
+                    FlowLayout(hSpacing: 10, vSpacing: 14) {
                         ForEach(lab.chips) { chip in
                             LabChipView(chip: chip)
                         }
@@ -220,16 +221,17 @@ struct LabDetailScreen: View {
 // ── Simple flow layout for chips ──────────────────────────────────────────────
 
 private struct FlowLayout: Layout {
-    var spacing: CGFloat = 8
+    var hSpacing: CGFloat = 8
+    var vSpacing: CGFloat = 8
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let width = proposal.width ?? 0
         var x: CGFloat = 0, y: CGFloat = 0, rowHeight: CGFloat = 0
         for view in subviews {
             let size = view.sizeThatFits(.unspecified)
-            if x + size.width > width && x > 0 { x = 0; y += rowHeight + spacing; rowHeight = 0 }
+            if x + size.width > width && x > 0 { x = 0; y += rowHeight + vSpacing; rowHeight = 0 }
             rowHeight = max(rowHeight, size.height)
-            x += size.width + spacing
+            x += size.width + hSpacing
         }
         return CGSize(width: width, height: y + rowHeight)
     }
@@ -238,10 +240,10 @@ private struct FlowLayout: Layout {
         var x = bounds.minX, y = bounds.minY, rowHeight: CGFloat = 0
         for view in subviews {
             let size = view.sizeThatFits(.unspecified)
-            if x + size.width > bounds.maxX && x > bounds.minX { x = bounds.minX; y += rowHeight + spacing; rowHeight = 0 }
+            if x + size.width > bounds.maxX && x > bounds.minX { x = bounds.minX; y += rowHeight + vSpacing; rowHeight = 0 }
             view.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
             rowHeight = max(rowHeight, size.height)
-            x += size.width + spacing
+            x += size.width + hSpacing
         }
     }
 }
