@@ -8,7 +8,7 @@ import Foundation
 
 enum AddCardData {
     static let defaultForm = CardForm(
-        holderName: "Saman Edirimuna",
+        holderName: "Sandun Dias",
         number:     "**** 9876 **** ****",
         expiry:     "02/30",
         cvv:        "",

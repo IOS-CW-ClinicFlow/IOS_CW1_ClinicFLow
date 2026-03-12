@@ -11,7 +11,7 @@ struct User {
     var email: String
     var phone: String
 
-    static let example = User(fullName: "Saman Edirimuni",
-                               email: "ABC@gmail.com",
-                               phone: "760012123")
+    static let example = User(fullName:"",
+                               email:"" ,
+                               phone: "")
 }

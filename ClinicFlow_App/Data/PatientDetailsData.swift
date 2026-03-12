@@ -13,20 +13,20 @@ struct PatientDetailsData {
         case .self:
             return PatientForm(
                 bookingFor:   .self,
-                fullName:     "Saman Edirimuna",
-                mobile:       "+94 78 665 7709",
+                fullName:     "",
+                mobile:       "+",
                 gender:       .male,
-                age:          "34",
+                age:          "",
                 relationship: .mother,
                 problem:      ""
             )
         case .someoneElse:
             return PatientForm(
                 bookingFor:   .someoneElse,
-                fullName:     "Rani Edirimuna",
-                mobile:       "+94 78 665 7709",
-                gender:       .female,
-                age:          "67",
+                fullName:     "",
+                mobile:       "",
+                gender:       .male,
+                age:          "",
                 relationship: .mother,
                 problem:      ""
             )

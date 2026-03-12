@@ -8,10 +8,13 @@ import SwiftUI
 
 struct AppointmentsScreen: View {
 
-    var onBack:            () -> Void                  = {}
-    var onAppointmentTap:  (Appointment) -> Void       = { _ in }
-    var onStartNow:        (Appointment) -> Void       = { _ in }
-
+    var onBack:            () -> Void            = {}
+    var onAppointmentTap:  (Appointment) -> Void = { _ in }
+    var onStartNow:        (Appointment) -> Void = { _ in }
+    var onReschedule:      (Appointment) -> Void = { _ in }
+    var onReBook:          (Appointment) -> Void = { _ in }
+    var onView:            (Appointment) -> Void = { _ in }
+    
     @State private var activeTab: AppointmentStatus = .upcoming
     @State private var showSearch: Bool = false
     @State private var remindStates: [UUID: Bool] = {
@@ -57,10 +60,33 @@ struct AppointmentsScreen: View {
                         ForEach(Array(filtered.enumerated()), id: \.element.id) { index, appt in
                             Button { onAppointmentTap(appt) } label: {
                                 AppointmentCard(
-                                    appointment:     appt,
-                                    remindMe:        remindStates[appt.id] ?? false,
-                                    onRemindToggle:  { remindStates[appt.id]?.toggle() },
-                                    onStartNow:      { onStartNow(appt) },
+                                    appointment: appt,
+                                    remindMe: remindStates[appt.id] ?? false,
+                                    onRemindToggle: { remindStates[appt.id]?.toggle() },
+
+                                    // Cancel
+                                    onCancel: {
+                                        print("Appointment cancelled")
+                                    },
+
+                                    // Start Now
+                                    onStartNow: {
+                                        onStartNow(appt)
+                                    },
+
+                                    // Reschedule → go to doctor page
+                                    onReschedule: {
+                                        onReschedule(appt)
+                                    },
+
+                                    onReBook: {
+                                        onReBook(appt)
+                                    },
+
+                                    onView: {
+                                        onView(appt)
+                                    },
+
                                     isFirstUpcoming: activeTab == .upcoming && index == 0
                                 )
                             }

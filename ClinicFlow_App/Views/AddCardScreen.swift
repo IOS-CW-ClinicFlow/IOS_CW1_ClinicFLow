@@ -33,7 +33,7 @@ struct AddCardScreen: View {
 
                     // Card Holder Name
                     fieldLabel("Card Holder Name")
-                    cardTextField("Saman Edirimuna", text: $form.holderName)
+                    cardTextField("Sandun Dias", text: $form.holderName)
 
                     // Card Number
                     fieldLabel("Card Number")

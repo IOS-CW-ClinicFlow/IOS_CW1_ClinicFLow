@@ -11,7 +11,7 @@ enum SuccessData {
     // ── Doctor — booking confirm (cash / bank) ────────────────────────────
     static func doctorBooking(
         entityName:  String = "Dr. Ryan De Silva",
-        patientName: String = "Saman Edirimuna",
+        patientName: String = "Sandun Dias",
         amount:      String = "Rs 4,000",
         date:        String = "4 Oct, 2026",
         time:        String = "07:00 PM"
@@ -28,7 +28,7 @@ enum SuccessData {
     // ── Doctor — payment success (card) ───────────────────────────────────
     static func doctorPayment(
         entityName:  String = "Dr. Ryan De Silva",
-        patientName: String = "Saman Edirimuna",
+        patientName: String = "Sandun Dias",
         amount:      String = "Rs 4,000",
         date:        String = "4 Oct, 2026",
         time:        String = "07:00 PM"
@@ -45,7 +45,7 @@ enum SuccessData {
     // ── Lab — booking confirm (cash / bank) ───────────────────────────────
     static func labBooking(
         entityName:  String = "X - Ray Lab",
-        patientName: String = "Saman Edirimuna",
+        patientName: String = "Sandun Dias",
         amount:      String = "Rs 2,000",
         date:        String = "4 Oct, 2026",
         time:        String = "07:00 PM"
@@ -62,7 +62,7 @@ enum SuccessData {
     // ── Lab — payment success (card) ──────────────────────────────────────
     static func labPayment(
         entityName:  String = "X - Ray Lab",
-        patientName: String = "Saman Edirimuna",
+        patientName: String = "Sandun Dias",
         amount:      String = "Rs 2,000",
         date:        String = "4 Oct, 2026",
         time:        String = "07:00 PM"
@@ -96,7 +96,7 @@ enum SuccessData {
     // ── Pharmacy — order complete / ready ─────────────────────────────────
     static func pharmacyOrderComplete(
         entityName:  String = "City Pharmacy",
-        patientName: String = "Saman Edirimuna",
+        patientName: String = "Sandun Dias",
         amount:      String = "Rs 3,500",
         date:        String = "4 Oct, 2026",
         counter:     String = "Counter 2"
