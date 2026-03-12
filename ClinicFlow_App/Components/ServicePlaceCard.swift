@@ -49,9 +49,7 @@ struct ServicePlaceCard: View {
                         .padding(.bottom, 9)
 
                     HStack(spacing: 5) {
-                        Image(systemName: "mappin.circle.fill")
-                            .font(.system(size: 12))
-                            .foregroundColor(Color(hex: "#2196F3"))
+                        MapPinCircleIcon(size: 12)
                         Text(place.location)
                             .font(.system(size: 12))
                             .foregroundColor(Color(hex: "#555555"))
@@ -59,9 +57,9 @@ struct ServicePlaceCard: View {
                     .padding(.bottom, 5)
 
                     HStack(spacing: 5) {
-                        Circle()
-                            .fill(Color(hex: "#2196F3"))
-                            .frame(width: 8, height: 8)
+                        Image(systemName: "clock.fill")
+                                .font(.system(size: 12))
+                                .foregroundColor(Color(hex: "#2196F3"))
                         Text(place.hours)
                             .font(.system(size: 12))
                             .foregroundColor(Color(hex: "#555555"))
