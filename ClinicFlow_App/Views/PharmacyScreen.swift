@@ -62,10 +62,10 @@ struct PharmacyScreen: View {
                         }
                     }
                     .padding(.bottom, 12)
-
+                    
                     // Location
                     HStack(spacing: 8) {
-                        Circle().fill(Color(hex: "#2196F3")).frame(width: 10, height: 10)
+                        MapPinCircleIcon(size: 12)
                         Text(pharmacy.location)
                             .font(.system(size: 12))
                             .foregroundStyle(Color(hex: "#555555"))
@@ -74,20 +74,22 @@ struct PharmacyScreen: View {
 
                     // Hours
                     HStack(spacing: 8) {
-                        Circle().fill(Color(hex: "#2196F3")).frame(width: 10, height: 10)
+                        Image(systemName: "clock.fill")
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color(hex: "#2196F3"))
                         Text(pharmacy.hours)
                             .font(.system(size: 12))
                             .foregroundStyle(Color(hex: "#555555"))
                     }
                     .padding(.bottom, 18)
 
-                    Divider().padding(.bottom, 14)
+                    Divider().padding(.bottom, 15)
 
                     // About
                     Text("About")
                         .font(.system(size: 14, weight: .bold))
                         .foregroundStyle(Color(hex: "#1a1a1a"))
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 7)
 
                     aboutText
                         .font(.system(size: 12))
@@ -96,7 +98,7 @@ struct PharmacyScreen: View {
                         .padding(.bottom, 12)
 
                     // Chips
-                    FlowLayout(spacing: 7) {
+                    FlowLayout(spacing: 10) {
                         ForEach(pharmacy.badges) { chip in
                             PharmacyChipView(chip: chip)
                         }
