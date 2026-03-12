@@ -113,7 +113,7 @@ private struct EditProfileSheet: View {
                             .frame(width: 90, height: 90).clipShape(Circle())
                             .overlay(Circle().stroke(Color(hex: "#E0ECF8"), lineWidth: 3))
                         ZStack {
-                            Circle().fill(Color(hex: "#2196F3")).frame(width: 26, height: 26)
+                            Circle().fill(Color(hex: "#1A8FD1")).frame(width: 26, height: 26)
                                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
                             Image(systemName: "pencil").font(.system(size: 11, weight: .bold)).foregroundColor(.white)
                         }
@@ -188,7 +188,7 @@ private struct PaymentMethodsSheet: View {
                                     .frame(width: 48, height: 48)
                                 Image(systemName: card.2)
                                     .font(.system(size: 20))
-                                    .foregroundColor(Color(hex: "#2196F3"))
+                                    .foregroundColor(Color(hex: "#1A8FD1"))
                             }
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(card.0).font(.system(size: 15, weight: .semibold)).foregroundColor(Color(hex: "#1a1a1a"))
@@ -212,13 +212,13 @@ private struct PaymentMethodsSheet: View {
                                     .frame(width: 48, height: 48)
                                 Image(systemName: "plus").font(.system(size: 18, weight: .semibold)).foregroundColor(Color(hex: "#2196F3"))
                             }
-                            Text("Add New Card").font(.system(size: 15, weight: .medium)).foregroundColor(Color(hex: "#2196F3"))
+                            Text("Add New Card").font(.system(size: 15, weight: .medium)).foregroundColor(Color(hex: "#1A8FD1"))
                             Spacer()
                         }
                         .padding(16)
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 14))
-                        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color(hex: "#2196F3").opacity(0.3), lineWidth: 1.5))
+                        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color(hex: "#1A8FD1").opacity(0.3), lineWidth: 1.5))
                     }
                     .buttonStyle(.plain)
                 }
@@ -318,7 +318,7 @@ private struct SettingsSheet: View {
                 }
                 Section("Account") {
                     Button("Change Password", role: .none) {}
-                        .foregroundColor(Color(hex: "#2196F3"))
+                        .foregroundColor(Color(hex: "#1A8FD1"))
                     Button("Delete Account", role: .destructive) {}
                 }
             }
@@ -369,7 +369,7 @@ private struct HelpCenterSheet: View {
                             HStack(spacing: 16) {
                                 ZStack {
                                     Circle().fill(Color(hex: "#EAF4FE")).frame(width: 44, height: 44)
-                                    Image(systemName: item.1).font(.system(size: 18)).foregroundColor(Color(hex: "#2196F3"))
+                                    Image(systemName: item.1).font(.system(size: 18)).foregroundColor(Color(hex: "#1A8FD1"))
                                 }
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(item.0).font(.system(size: 14, weight: .semibold)).foregroundColor(Color(hex: "#1a1a1a"))

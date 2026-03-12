@@ -76,7 +76,7 @@ struct DoctorDetailScreen: View {
                         } label: {
                             Text(isAboutExpanded ? "Show less" : "Read more")
                                 .font(.system(size: 13, weight: .semibold))
-                                .foregroundStyle(Color(hex: "#2196F3"))
+                                .foregroundStyle(Color(hex: "#1A8FD1"))
                         }
                         .buttonStyle(.plain)
                     }

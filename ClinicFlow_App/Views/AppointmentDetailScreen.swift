@@ -102,10 +102,10 @@ struct AppointmentDetailScreen: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 15)
                         .background(trackingState == .idle
-                                    ? Color(hex: "#2196F3")
-                                    : Color(hex: "#2196F3").opacity(0.6))
+                                    ? Color(hex: "#1A8FD1")
+                                    : Color(hex: "#1A8FD1").opacity(0.6))
                         .clipShape(Capsule())
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.4), radius: 16, x: 0, y: 4)
+                        .shadow(color: Color(hex: "#1A8FD1").opacity(0.4), radius: 16, x: 0, y: 4)
                         .animation(.easeInOut, value: trackingState)
                 }
                 .buttonStyle(.plain)
