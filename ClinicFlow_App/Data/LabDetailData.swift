@@ -11,7 +11,7 @@ enum LabDetailData {
     static let xRay = LabDetail(
         name:       "X - Ray",
         subtitle:   "Radiology, Skeletal",
-        imageName:  "lab_xray",
+        imageName:  "lab-xray1",
         location:   "Ground Floor, B-Wing",
         hours:      "Mon - Sat  |  10:00 AM - 08:00 PM",
         about:      "Our X-ray department provides fast and accurate imaging to help diagnose bone fractures, infections, and other conditions with minimal radiation exposure.",
@@ -38,7 +38,7 @@ enum LabDetailData {
     static let ctScan = LabDetail(
         name:       "CT Scan",
         subtitle:   "Radiology, Internal Organs",
-        imageName:  "lab_ct",
+        imageName:  "lab-CT2",
         location:   "Ground Floor, A-Wing",
         hours:      "Mon - Sat  |  11:00 AM - 05:00 PM",
         about:      "Our CT scan unit delivers detailed cross-sectional images of internal organs, helping physicians detect tumours, injuries, and vascular conditions with precision.",
@@ -65,7 +65,7 @@ enum LabDetailData {
     static let bloodTest = LabDetail(
         name:       "Blood Test",
         subtitle:   "Hematology, General",
-        imageName:  "lab_blood",
+        imageName:  "lab-blood3",
         location:   "Level 2, C-Wing",
         hours:      "Mon - Sun  |  07:00 AM - 09:00 PM",
         about:      "Our haematology lab offers a full range of blood panels — from CBC and lipid profiles to glucose and thyroid function — with rapid turnaround times.",
@@ -92,7 +92,7 @@ enum LabDetailData {
     static let mri = LabDetail(
         name:       "MRI Scan",
         subtitle:   "Radiology, Soft Tissue",
-        imageName:  "lab_mri",
+        imageName:  "lab-MRI4",
         location:   "Level 1, A-Wing",
         hours:      "Mon - Sat  |  08:00 AM - 06:00 PM",
         about:      "Our MRI unit uses high-field magnetic resonance imaging to produce detailed images of soft tissues, joints, and the brain — with no ionising radiation.",
@@ -119,7 +119,7 @@ enum LabDetailData {
     static let ecg = LabDetail(
         name:       "ECG",
         subtitle:   "Cardiology, Cardiac Monitoring",
-        imageName:  "lab_blood",
+        imageName:  "lab-ECG5",
         location:   "Level 1, Cardiac Unit",
         hours:      "Mon - Sun  |  07:00 AM - 09:00 PM",
         about:      "Our ECG unit provides fast electrocardiogram recordings to detect heart rhythm abnormalities, arrhythmias, and cardiac conditions with immediate results.",

@@ -11,7 +11,7 @@ struct Doctor: Identifiable {
     let name: String
     let credentials: String
     let rating: Double
-    let imageName: String           // Asset name in Assets.xcassets
+    let imageName: String           
     let backgroundColorHex: String
     let slug: String
 }

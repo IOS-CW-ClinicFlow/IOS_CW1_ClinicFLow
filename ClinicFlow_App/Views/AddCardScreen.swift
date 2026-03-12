@@ -24,11 +24,11 @@ struct AddCardScreen: View {
                 VStack(alignment: .leading, spacing: 0) {
 
                     // Live card preview
-                    BankCardView(
-                        holderName: form.holderName,
-                        number:     form.number,
-                        expiry:     form.expiry
-                    )
+                    Image("creditCard") // your asset image name
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(16)
+                        .padding(.bottom, 24)
                     .padding(.bottom, 24)
 
                     // Card Holder Name
