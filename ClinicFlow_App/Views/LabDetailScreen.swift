@@ -32,7 +32,7 @@ struct LabDetailScreen: View {
                 .foregroundStyle(Color(hex: "#777777"))
             + Text("Read more")
                 .fontWeight(.semibold)
-                .foregroundStyle(Color(hex: "#2196F3"))
+                .foregroundStyle(Color(hex: "#1A8FD1"))
         }
     }
 
@@ -74,7 +74,7 @@ struct LabDetailScreen: View {
                     // Location
                     HStack(spacing: 8) {
                         Circle()
-                            .fill(Color(hex: "#2196F3"))
+                            .fill(Color(hex: "#1A8FD1"))
                             .frame(width: 10, height: 10)
                         Text(lab.location)
                             .font(.system(size: 12))
@@ -207,11 +207,11 @@ struct LabDetailScreen: View {
                         .frame(width: 40, height: 40)
                     Image(systemName: iconName)
                         .font(.system(size: 16))
-                        .foregroundStyle(Color(hex: "#2196F3"))
+                        .foregroundStyle(Color(hex: "#1A8FD1"))
                 }
                 Text(label)
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(Color(hex: "#2196F3"))
+                    .foregroundStyle(Color(hex: "#1A8FD1"))
             }
         }
         .buttonStyle(.plain)
