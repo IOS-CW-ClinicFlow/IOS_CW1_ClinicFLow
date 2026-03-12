@@ -51,18 +51,7 @@ struct SuccessScreen: View {
 
             // ── CTA buttons ────────────────────────────────────────────────
             VStack(spacing: 12) {
-                Button(action: onViewAppointment) {
-                    Text(info.kind.primaryButtonLabel)
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Color(hex: "#2196F3"))
-                        .clipShape(Capsule())
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.38),
-                                radius: 14, x: 0, y: 4)
-                }
-                .buttonStyle(.plain)
+                PrimaryButton(title: info.kind.primaryButtonLabel, action: onViewAppointment)
 
                 if info.kind.showGoHome {
                     Button(action: onGoHome) {
@@ -76,10 +65,11 @@ struct SuccessScreen: View {
                 }
             }
             .padding(.horizontal, 22)
-            .padding(.bottom, 20)
+            .padding(.bottom, 32)
             .background(Color.white)
         }
         .background(Color.white)
+        .ignoresSafeArea(edges: .bottom)
     }
 
     // ── Subtitle ───────────────────────────────────────────────────────────
@@ -133,7 +123,7 @@ struct SuccessScreen: View {
         let details = info.details
         if details.count == 1 {
             SuccessDetailRow(detail: details[0])
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .center) // <-- changed from .leading
         } else {
             let rows = stride(from: 0, to: details.count, by: 2).map {
                 Array(details[$0 ..< min($0 + 2, details.count)])
@@ -143,7 +133,7 @@ struct SuccessScreen: View {
                     HStack(spacing: 0) {
                         ForEach(row) { detail in
                             SuccessDetailRow(detail: detail)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .frame(maxWidth: .infinity, alignment: .center) // <-- changed from .leading
                         }
                         if row.count < 2 {
                             Spacer().frame(maxWidth: .infinity)
@@ -151,6 +141,7 @@ struct SuccessScreen: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity) // ensure VStack fills width for proper centering
         }
     }
 }

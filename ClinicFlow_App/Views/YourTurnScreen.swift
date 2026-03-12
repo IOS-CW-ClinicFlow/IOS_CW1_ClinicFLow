@@ -4,7 +4,6 @@
 //
 //  Created by cobsccomp24.2p-021 on 2026-03-10.
 //
-//
 import SwiftUI
 
 struct YourTurnScreen: View {
@@ -68,20 +67,17 @@ struct YourTurnScreen: View {
                         // Queue cards
                         HStack(spacing: 10) {
                             QueueCard(label: "Current",
-                                      value: "\(queue.current)",
+                                      value: "\(queue.yourNumber)",
                                       unit: nil,
-                                      isHighlighted: false)
-
+                                      isHighlighted: true)
                             QueueCard(label: "Your No.",
                                       value: "\(queue.yourNumber)",
                                       unit: nil,
-                                      isHighlighted: true) // keeps default blue
-
+                                      isHighlighted: true)
                             QueueCard(label: "Wait",
                                       value: "Now",
                                       unit: nil,
-                                      isHighlighted: true,
-                                      highlightColor: Color(hex: "#2ECC88")) 
+                                      isHighlighted: true)
                         }
                         .padding(.horizontal, 22)
                         .padding(.top, 8)
@@ -101,7 +97,7 @@ struct YourTurnScreen: View {
                             (label: "Time",        value: appointment.time),
                             (label: "Location",    value: appointment.location),
                             (label: "Booking ID",  value: appointment.bookingId),
-                            (label: "Booking for", value: AppointmentsData.currentPatient.fullName)
+                            (label: "Booking for", value: "Self"),
                         ]
                     )
 
@@ -111,25 +107,13 @@ struct YourTurnScreen: View {
             .background(Color.white)
 
             // ── Bottom button ──────────────────────────────────────────────
-            VStack(spacing: 0) {
+            VStack(spacing: 16) {
                 Rectangle().fill(Color(hex: "#F2F2F7")).frame(height: 1)
 
                 if showScanQR {
-                    Button { onScanQR() } label: {
-                        HStack(spacing: 8) {
-                            Image(systemName: "qrcode.viewfinder")
-                                .font(.system(size: 16, weight: .semibold))
-                            Text("Scan QR")
-                                .font(.system(size: 15, weight: .bold))
-                        }
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Color(hex: "#2196F3"))
-                        .clipShape(Capsule())
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.4), radius: 14, x: 0, y: 4)
+                    PrimaryButton(title: "Scan QR") {
+                        onScanQR()
                     }
-                    .buttonStyle(.plain)
                     .transition(.scale(scale: 0.85).combined(with: .opacity))
                 } else {
                     // Greyed placeholder — keeps layout stable
@@ -148,11 +132,13 @@ struct YourTurnScreen: View {
                 }
             }
             .padding(.horizontal, 22)
-            .padding(.vertical, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 32)
             .background(Color.white)
             .animation(.spring(response: 0.4, dampingFraction: 0.75), value: showScanQR)
         }
         .background(Color.white)
+        .ignoresSafeArea(edges: .bottom)
         .onAppear {
             pulse = true
             DispatchQueue.main.asyncAfter(deadline: .now() + AppointmentsData.scanQRDelaySeconds) {

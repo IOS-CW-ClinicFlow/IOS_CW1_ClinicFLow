@@ -4,6 +4,7 @@
 //
 //  Created by COBSCCOMP24.2P-019 on 2026-03-07.
 //
+
 import SwiftUI
 
 indirect enum AppScreen: Equatable {
@@ -219,14 +220,41 @@ struct ContentView: View {
                         onBack: {
                             withAnimation(.easeInOut(duration: 0.3)) { currentScreen = .home }
                         },
+
                         onAppointmentTap: { appt in
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 currentScreen = .appointmentDetail(appt, from: .appointments)
                             }
                         },
+
                         onStartNow: { appt in
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 currentScreen = .appointmentDetail(appt, from: .appointments)
+                            }
+                        },
+
+                        // Reschedule → Doctor page
+                        onReschedule: { appt in
+                            if let doctor = DoctorDetailData.bySlug[appt.doctorSlug] {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    currentScreen = .doctorDetail(doctor, from: .appointments)
+                                }
+                            }
+                        },
+
+                        // ReBook → Doctor page
+                        onReBook: { appt in
+                            if let doctor = DoctorDetailData.bySlug[appt.doctorSlug] {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    currentScreen = .doctorDetail(doctor, from: .appointments)
+                                }
+                            }
+                        },
+
+                        // View → Consultation complete
+                        onView: { _ in
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentScreen = .consultationComplete
                             }
                         }
                     )
@@ -239,7 +267,7 @@ struct ContentView: View {
                         },
                         onYourTurn: {
                             withAnimation(.easeInOut(duration: 0.4)) { currentScreen = .yourTurn(appt) }
-                        }
+                        },
                     )
 
                 case .yourTurn(let appt):
@@ -604,6 +632,7 @@ struct ContentView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.35), value: currentScreen)
+            .ignoresSafeArea(edges: .bottom)
 
             if showBottomNav {
                 BottomNav(activeTab: activeTabLabel) { tab in

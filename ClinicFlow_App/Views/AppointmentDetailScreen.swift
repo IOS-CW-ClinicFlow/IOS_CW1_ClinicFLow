@@ -105,17 +105,19 @@ struct AppointmentDetailScreen: View {
                                     ? Color(hex: "#2196F3")
                                     : Color(hex: "#2196F3").opacity(0.6))
                         .clipShape(Capsule())
-                        .shadow(color: Color(hex: "#2196F3").opacity(0.4), radius: 14, x: 0, y: 4)
+                        .shadow(color: Color(hex: "#2196F3").opacity(0.4), radius: 16, x: 0, y: 4)
                         .animation(.easeInOut, value: trackingState)
                 }
                 .buttonStyle(.plain)
                 .disabled(trackingState == .tracking)
                 .padding(.horizontal, 22)
-                .padding(.vertical, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 32)
             }
             .background(Color.white)
         }
         .background(Color.white)
+        .ignoresSafeArea(edges: .bottom)
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: trackingState)
     }
 
@@ -124,15 +126,11 @@ struct AppointmentDetailScreen: View {
     private func startTracking() {
         secondsRemaining = AppointmentsData.trackingCountdownSeconds
         withAnimation { trackingState = .tracking }
-
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if secondsRemaining > 1 {
                 secondsRemaining -= 1
             } else {
                 stopTimer()
-
-                AppointmentsData.currentQueue.current = AppointmentsData.currentQueue.yourNumber
-
                 onYourTurn()
             }
         }

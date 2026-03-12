@@ -19,6 +19,8 @@ struct AppointmentCard: View {
     // First upcoming card gets "Start Now", rest get "Reschedule"
     var isFirstUpcoming: Bool = false
 
+    @State private var showCancelConfirm = false
+
     var body: some View {
         VStack(spacing: 0) {
 
@@ -99,7 +101,7 @@ struct AppointmentCard: View {
                 switch appointment.status {
                 case .upcoming:
                     // Cancel (outline)
-                    outlineButton(label: "Cancel", action: onCancel)
+                    outlineButton(label: "Cancel", action: { showCancelConfirm = true })
                     // Start Now (green) or Reschedule (blue)
                     if isFirstUpcoming {
                         gradientButton(label: "Start Now", action: onStartNow)
@@ -124,6 +126,16 @@ struct AppointmentCard: View {
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .shadow(color: .black.opacity(0.07), radius: 12, x: 0, y: 2)
+        .confirmationDialog(
+            "Cancel Appointment",
+            isPresented: $showCancelConfirm,
+            titleVisibility: .visible
+        ) {
+            Button("Yes, Cancel Appointment", role: .destructive) { onCancel() }
+            Button("Keep Appointment", role: .cancel) {}
+        } message: {
+            Text("Are you sure you want to cancel your appointment with \(appointment.doctorName)?")
+        }
     }
 
     // ── Button helpers ─────────────────────────────────────────────────────
