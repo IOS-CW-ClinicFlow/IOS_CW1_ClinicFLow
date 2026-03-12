@@ -77,7 +77,8 @@ struct YourTurnScreen: View {
                             QueueCard(label: "Wait",
                                       value: "Now",
                                       unit: nil,
-                                      isHighlighted: true)
+                                      isHighlighted: true,
+                                      highlightColor: Color(hex: "#2ECC88"))
                         }
                         .padding(.horizontal, 22)
                         .padding(.top, 8)

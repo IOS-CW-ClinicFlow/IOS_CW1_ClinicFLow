@@ -14,7 +14,7 @@ struct DoctorDetailData {
             ("ryan-de-silva", DoctorDetail(
                 name:       "Dr. Ryan De Silva",
                 specialty:  "Cardiologist",
-                avatarName: "doc_ryan",
+                avatarName: "doc5",
                 patients:   "7,500+",
                 experience: "10+",
                 rating:     "4.9+",
@@ -42,7 +42,7 @@ struct DoctorDetailData {
             ("sarath-fernando", DoctorDetail(
                 name:       "Dr. Sarath Fernando",
                 specialty:  "Dentist",
-                avatarName: "doc_sarath",
+                avatarName: "doc7",
                 patients:   "3,800+",
                 experience: "12+",
                 rating:     "4.7+",
@@ -56,7 +56,7 @@ struct DoctorDetailData {
             ("amila-herath", DoctorDetail(
                 name:       "Dr. Amila Herath",
                 specialty:  "Neurologist",
-                avatarName: "doc_mal",
+                avatarName: "doc4",
                 patients:   "6,100+",
                 experience: "9+",
                 rating:     "4.8+",
@@ -71,7 +71,7 @@ struct DoctorDetailData {
             ("ruwini-maleesha", DoctorDetail(
                 name:       "Dr. Ruwini Maleesha",
                 specialty:  "Dermatologist",
-                avatarName: "doc_ruwini",
+                avatarName: "doc2",
                 patients:   "4,900+",
                 experience: "7+",
                 rating:     "4.7+",
@@ -80,6 +80,35 @@ struct DoctorDetailData {
                     WorkingHours(day: "Tuesday",  hours: "10:00 - 17:00"),
                     WorkingHours(day: "Thursday", hours: "10:00 - 17:00"),
                     WorkingHours(day: "Saturday", hours: "09:00 - 13:00"),
+                ]
+            )),
+            ("nayanathara", DoctorDetail(
+                name:       "Dr. Nayanathara",
+                specialty:  "Cardiologist",
+                avatarName: "doc1",
+                patients:   "4,300+",
+                experience: "6+",
+                rating:     "4.8+",
+                about:      "Cardiologist specialising in heart health, diagnosis, and treatment of cardiovascular diseases.",
+                workingHours: [
+                    WorkingHours(day: "Monday",    hours: "09:00 - 16:00"),
+                    WorkingHours(day: "Wednesday", hours: "09:00 - 16:00"),
+                    WorkingHours(day: "Friday",    hours: "09:00 - 14:00"),
+                ]
+            )),
+
+            ("harsha-fernando", DoctorDetail(
+                name:       "Dr. Harsha Fernando",
+                specialty:  "General Medicine",
+                avatarName: "doc6",
+                patients:   "6,800+",
+                experience: "11+",
+                rating:     "4.9+",
+                about:      "Experienced general physician providing diagnosis and treatment for a wide range of medical conditions.",
+                workingHours: [
+                    WorkingHours(day: "Tuesday",  hours: "08:00 - 15:00"),
+                    WorkingHours(day: "Thursday", hours: "08:00 - 15:00"),
+                    WorkingHours(day: "Saturday", hours: "08:00 - 12:00"),
                 ]
             )),
         ]

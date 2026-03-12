@@ -23,10 +23,9 @@ struct Appointment: Identifiable, Equatable {
     let avatarName:  String
     let status:      AppointmentStatus
     var remindMe:    Bool = false
-    var doctorSlug:  String = ""   // links to DoctorDetailData.bySlug
+    var doctorSlug:  String = ""   
 
-    // Exclude auto-generated id from equality so two appointments
-    // with the same data are considered equal regardless of UUID
+
     static func == (lhs: Appointment, rhs: Appointment) -> Bool {
         lhs.doctorName == rhs.doctorName &&
         lhs.specialty  == rhs.specialty  &&
