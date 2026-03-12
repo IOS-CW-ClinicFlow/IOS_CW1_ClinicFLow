@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+// ─── MARK: App-wide brand colours ─────────────────────────────────────────────
+
 extension Color {
 
     // ── Brand ──────────────────────────────────────────────────────────────
-    static let cfBlue     = Color(hex: "#2a9df4")
-    static let cfBlueDark = Color(hex: "#1A6FE0")
+    static let cfBlue     = Color(hex: "#1A8FD1")
+    static let cfBlueDark = Color(hex: "#1270A8")
 
     // ── Backgrounds ────────────────────────────────────────────────────────
     static let cfBackground = Color(hex: "#fafafa")
@@ -25,15 +27,15 @@ extension Color {
 
     // ── Navigation ─────────────────────────────────────────────────────────
     static let cfNavInactive = Color(hex: "#aaaaaa")
-    // ── Error color ─────────────────────────────────────────────────────────
+
+    // ── Error ──────────────────────────────────────────────────────────────
     static let cfError = Color.red
 }
 
-
-// ── Hex initialiser ────────────────────────────────────────────────────────────
+// ─── MARK: Hex initialiser ────────────────────────────────────────────────────
 
 extension Color {
-    /// Initialise a `Color` from a CSS-style hex string, e.g. `"#2a9df4"`.
+    /// Initialise a `Color` from a CSS-style hex string, e.g. `"#1A8FD1"`.
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
@@ -52,6 +54,7 @@ extension Color {
         )
     }
 }
+
 // ─── MARK: Home screen tokens ─────────────────────────────────────────────────
 // Screen-specific colours & style constants for HomeScreen.
 // Kept here so all colour values live in one file.
@@ -69,12 +72,12 @@ enum HomeTheme {
     static let appointmentFooterBg = Color.black.opacity(0.18)
 
     // ── Category icon circles ──────────────────────────────────────────────
-    static let categoryCircleBg = Color(hex: "#EAF4FE")
-    static let categoryIcon     = Color(hex: "#2196F3")
+    static let categoryCircleBg = Color(hex: "#E3F2FC")
+    static let categoryIcon     = Color(hex: "#1A8FD1")
 
     // ── Filter / search ────────────────────────────────────────────────────
-    static let filterButtonBg     = Color(hex: "#2196F3")
-    static let filterButtonShadow = Color(hex: "#2196F3").opacity(0.4)
+    static let filterButtonBg     = Color(hex: "#1A8FD1")
+    static let filterButtonShadow = Color(hex: "#1A8FD1").opacity(0.4)
     static let searchBorder       = Color(hex: "#E8E8EE")
     static let searchPlaceholder  = Color(hex: "#C8C8D0")
     static let searchIcon         = Color(hex: "#BBBBCC")
@@ -88,7 +91,7 @@ enum HomeTheme {
     static let ratingTextColor = Color(hex: "#333333")
 
     // ── Section header ─────────────────────────────────────────────────────
-    static let seeAllColor = Color(hex: "#2196F3")
+    static let seeAllColor = Color(hex: "#1A8FD1")
 
     // ── Card shadow ────────────────────────────────────────────────────────
     static let cardShadow = Color.black.opacity(0.08)

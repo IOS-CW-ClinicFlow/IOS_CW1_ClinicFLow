@@ -24,7 +24,7 @@ struct PharmacyScreen: View {
             return Text(pharmacy.about).foregroundStyle(Color(hex: "#777777"))
         } else {
             return Text(preview + "... ").foregroundStyle(Color(hex: "#777777"))
-                + Text("Read more").fontWeight(.semibold).foregroundStyle(Color(hex: "#2196F3"))
+                + Text("Read more").fontWeight(.semibold).foregroundStyle(Color(hex: "#1A8FD1"))
         }
     }
 
@@ -76,7 +76,7 @@ struct PharmacyScreen: View {
                     HStack(spacing: 8) {
                         Image(systemName: "clock.fill")
                                 .font(.system(size: 12))
-                                .foregroundStyle(Color(hex: "#2196F3"))
+                                .foregroundStyle(Color(hex: "#1A8FD1"))
                         Text(pharmacy.hours)
                             .font(.system(size: 12))
                             .foregroundStyle(Color(hex: "#555555"))
@@ -156,11 +156,11 @@ struct PharmacyScreen: View {
                     Circle().fill(Color(hex: "#E8F4FD")).frame(width: 40, height: 40)
                     Image(systemName: iconName)
                         .font(.system(size: 16))
-                        .foregroundStyle(Color(hex: "#2196F3"))
+                        .foregroundStyle(Color(hex: "#1A8FD1"))
                 }
                 Text(label)
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(Color(hex: "#2196F3"))
+                    .foregroundStyle(Color(hex: "#1A8FD1"))
             }
         }
         .buttonStyle(.plain)

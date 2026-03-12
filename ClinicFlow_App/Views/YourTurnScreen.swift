@@ -127,7 +127,7 @@ struct YourTurnScreen: View {
                     .foregroundColor(.white.opacity(0.5))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
-                    .background(Color(hex: "#2196F3").opacity(0.35))
+                    .background(Color(hex: "#1A8FD1").opacity(0.35))
                     .clipShape(Capsule())
                     .transition(.opacity)
                 }
