@@ -226,55 +226,17 @@ struct HomeScreen: View {
                 HStack(spacing: 14) {
                     ForEach(HomeData.doctors) { doctor in
                         Button { onDoctorTap(doctor) } label: {
-                            VStack(spacing: 0) {
-                                ZStack(alignment: .bottomTrailing) {
-                                    Color(hex: doctor.backgroundColorHex)
-                                        .frame(height: 140)
-                                    Image(doctor.imageName)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(height: 140)
-                                        .clipped()
-                                    HStack(spacing: 3) {
-                                        Image(systemName: "star.fill")
-                                            .font(.system(size: 10))
-                                            .foregroundStyle(Color(hex: "#FFC107"))
-                                        Text(String(format: "%.1f", doctor.rating))
-                                            .font(.system(size: 12, weight: .bold))
-                                            .foregroundStyle(Color(hex: "#333333"))
-                                    }
-                                    .padding(.vertical, 4)
-                                    .padding(.horizontal, 8)
-                                    .background(Color.white)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 1)
-                                    .padding(10)
-                                }
-                                .frame(height: 140)
-                                .clipped()
-
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(doctor.name)
-                                        .font(.system(size: 13, weight: .bold))
-                                        .foregroundStyle(Color(hex: "#1a1a1a"))
-                                        .lineLimit(2)
-                                    Text(doctor.credentials)
-                                        .font(.system(size: 11))
-                                        .foregroundStyle(Color(hex: "#AAAAAA"))
-                                        .lineLimit(2)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 11)
-                            }
-                            .frame(width: 150)
-                            .background(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .shadow(color: .black.opacity(0.07), radius: 12, x: 0, y: 3)
+                            ClinicCardView(
+                                title: doctor.name,
+                                subtitle: doctor.credentials,
+                                info: nil,
+                                imageName: doctor.imageName,
+                                backgroundHex: doctor.backgroundColorHex,
+                                rating: doctor.rating,
+                            )
                         }
                         .buttonStyle(.plain)
-                    }
-                }
+                    }                }
                 .padding(.bottom, 4)
             }
         }
@@ -295,52 +257,25 @@ struct HomeScreen: View {
             }
             .padding(.bottom, 12)
 
-            HStack(spacing: 12) {
-                ForEach(HomeData.labs) { lab in
-                    Button { onLabTap(lab) } label: {
-                        VStack(spacing: 0) {
-                            ZStack(alignment: .bottomTrailing) {
-                                Color(hex: "#D0E8F5").frame(height: 92)
-                                Image(lab.imageName)
-                                    .resizable().scaledToFill()
-                                    .frame(height: 92).clipped()
-                                HStack(spacing: 3) {
-                                    Image(systemName: "star.fill")
-                                        .font(.system(size: 9))
-                                        .foregroundColor(Color(hex: "#FFC107"))
-                                    Text(String(format: "%.1f", lab.rating))
-                                        .font(.system(size: 11, weight: .bold))
-                                        .foregroundColor(Color(hex: "#333333"))
-                                }
-                                .padding(.vertical, 3).padding(.horizontal, 7)
-                                .background(Color.white)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                .shadow(color: .black.opacity(0.18), radius: 4, x: 0, y: 1)
-                                .padding(8)
-                            }
-                            .frame(height: 92).clipped()
-
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(lab.name)
-                                    .font(.system(size: 13, weight: .bold))
-                                    .foregroundColor(Color(hex: "#1a1a1a"))
-                                HStack(spacing: 5) {
-                                    Circle().fill(Color(hex: "#2a9df4")).frame(width: 7, height: 7)
-                                    Text("\(lab.waitTime) · \(lab.distance)")
-                                        .font(.system(size: 11))
-                                        .foregroundColor(Color(hex: "#888888"))
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 10).padding(.vertical, 9)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 14) {
+                    ForEach(HomeData.labs) { lab in
+                        Button { onLabTap(lab) } label: {
+                            ClinicCardView(
+                                title: lab.name,
+                                subtitle: nil,
+                                info: "\(lab.waitTime) · \(lab.distance)",
+                                imageName: lab.imageName,
+                                backgroundHex: "#D0E8F5",
+                                rating: lab.rating
+                            )
                         }
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 2)
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
+                .padding(.bottom, 4)
             }
+
         }
     }
 }

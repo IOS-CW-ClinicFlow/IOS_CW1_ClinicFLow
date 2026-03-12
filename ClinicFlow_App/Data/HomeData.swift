@@ -16,7 +16,7 @@ enum HomeData {
         time:       "09:00 - 10:00",
         location:   "Floor 1, Room 3",
         bookingId:  "#CF00123",
-        avatarName: "doctor_avatar",
+        avatarName: "doc1",
         status:     .upcoming
     )
 
@@ -26,7 +26,7 @@ enum HomeData {
             name:               "Dr. Ryan De Silva",
             credentials:        "MBBS, MD Cardiology",
             rating:             4.9,
-            imageName:          "doc5",
+            imageName:          "doc5.1",
             backgroundColorHex: "#D6E8F5",
             slug:               "ryan-de-silva"
         ),
@@ -34,7 +34,7 @@ enum HomeData {
             name:               "Dr. Jayaani Dennis",
             credentials:        "MBBS, MSc Physiology",
             rating:             4.8,
-            imageName:          "doc3",
+            imageName:          "doc3.1",
             backgroundColorHex: "#E8E8F2",
             slug:               "jayaani-dennis"
         ),
@@ -42,7 +42,7 @@ enum HomeData {
             name:               "Dr. Sarath Fernando",
             credentials:        "BDS, MDS Dentistry",
             rating:             4.7,
-            imageName:          "doc7",
+            imageName:          "doc7.1",
             backgroundColorHex: "#D6F5E8",
             slug:               "sarath-fernando"
         ),

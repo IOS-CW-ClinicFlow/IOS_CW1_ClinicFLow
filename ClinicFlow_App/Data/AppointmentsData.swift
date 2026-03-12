@@ -10,7 +10,7 @@ import Foundation
 struct AppointmentsData {
 
     // ── Tracking timer (seconds) — set to 15 for demo, higher for production
-    static let trackingCountdownSeconds: Int = 15
+    static let trackingCountdownSeconds: Int = 5
 
     // ── Delay before Scan QR button appears after "Your Turn"
     static let scanQRDelaySeconds: Double = 3.0
@@ -38,24 +38,24 @@ struct AppointmentsData {
                     date: "Mar 25, 2026", time: "10:00 AM",
                     location: "Floor 1, Room 7",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doctor_avatar",
-                    status: .upcoming, remindMe: true, doctorSlug: "ryan-de-silva"),
+                    avatarName: "doc1",
+                    status: .upcoming, remindMe: true, doctorSlug: "nayanathara"),
 
         Appointment(doctorName: "Dr. Harsha Fernando",
                     specialty:  "General Medicine",
                     date: "Mar 30, 2026", time: "11:00 AM",
                     location: "Floor 2, Room 1",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doctor_male",
-                    status: .upcoming, remindMe: true, doctorSlug: "ryan-de-silva"),
+                    avatarName: "doc6",
+                    status: .upcoming, remindMe: true, doctorSlug: "harsha-fernando"),
 
         Appointment(doctorName: "Dr. Amila Herath",
                     specialty:  "Internal Medicine",
                     date: "Apr 2, 2026", time: "10:00 AM",
                     location: "Floor 3, Room 4",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doctor_female",
-                    status: .upcoming, remindMe: false, doctorSlug: "ryan-de-silva"),
+                    avatarName: "doc4",
+                    status: .upcoming, remindMe: false, doctorSlug: "amila-herath"),
 
         // ── Completed ──────────────────────────────────────────────────────
         Appointment(doctorName: "Dr. Jayaani Dennis",
@@ -63,7 +63,7 @@ struct AppointmentsData {
                     date: "Dec 25, 2025", time: "10:00 AM",
                     location: "Floor 1, Room 1",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doc_jayaani",
+                    avatarName: "doc3",
                     status: .completed, doctorSlug: "jayaani-dennis"),
 
         Appointment(doctorName: "Dr. Sarath Fernando",
@@ -71,7 +71,7 @@ struct AppointmentsData {
                     date: "Aug 25, 2025", time: "10:00 AM",
                     location: "Floor 2, Room 5",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doc_sarath",
+                    avatarName: "doc7",
                     status: .completed, doctorSlug: "sarath-fernando"),
 
         Appointment(doctorName: "Dr. Ruwini Maleesha",
@@ -79,8 +79,8 @@ struct AppointmentsData {
                     date: "Apr 15, 2025", time: "10:00 AM",
                     location: "Floor 1, Room 3",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doctor_female",
-                    status: .completed, doctorSlug: "sarath-fernando"),
+                    avatarName: "doc2",
+                    status: .completed, doctorSlug: "ruwini-maleesha"),
 
         // ── Cancelled ──────────────────────────────────────────────────────
         Appointment(doctorName: "Dr. Ryan De Silva",
@@ -88,7 +88,7 @@ struct AppointmentsData {
                     date: "Jan 23, 2026", time: "07:00 PM",
                     location: "Floor 1, Room 3",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doc_ryan",
+                    avatarName: "doc5",
                     status: .cancelled, doctorSlug: "ryan-de-silva"),
 
         Appointment(doctorName: "Dr. Ruwini Maleesha",
@@ -96,15 +96,15 @@ struct AppointmentsData {
                     date: "Dec 25, 2025", time: "10:00 AM",
                     location: "Floor 2, Room 2",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doctor_female",
-                    status: .cancelled, doctorSlug: "sarath-fernando"),
+                    avatarName: "doc2",
+                    status: .cancelled, doctorSlug: "ruwini-maleesha"),
 
         Appointment(doctorName: "Dr. Sarath Fernando",
                     specialty:  "Dentistry",
                     date: "Aug 25, 2025", time: "10:00 AM",
                     location: "Floor 3, Room 1",
                     bookingId: "#DR4S2SA54",
-                    avatarName: "doc_sarath",
+                    avatarName: "doc7",
                     status: .cancelled, doctorSlug: "sarath-fernando"),
     ]
 }

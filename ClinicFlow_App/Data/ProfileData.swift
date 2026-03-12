@@ -8,8 +8,8 @@ import SwiftUI
 
 struct ProfileData {
 
-    static let userName   = "Saleh Sameer"
-    static let avatarName = "profile_avatar"   // asset in Assets.xcassets
+    static let userName   = "Sandun Dias"
+    static let avatarName = "userProfile"   
 
     static let menuItems: [ProfileMenuItem] = [
         ProfileMenuItem(label: "Your profile",      icon: "person"),
