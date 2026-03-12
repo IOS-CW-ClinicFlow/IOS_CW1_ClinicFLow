@@ -4,6 +4,12 @@
 //
 //  Created by COBSCCOMP242P-051 on 2026-03-10.
 //
+//
+//  LabSlotPicker.swift
+//  ClinicFlow_App
+//
+//  Created by COBSCCOMP242P-051 on 2026-03-10.
+//
 import SwiftUI
 
 struct LabDayPicker: View {
@@ -29,7 +35,7 @@ struct LabDayPicker: View {
                         .padding(.horizontal, 18)
                         .padding(.vertical, 11)
                         .background(selectedIndex == index ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .clipShape(Capsule())
                     }
                     .buttonStyle(.plain)
                 }
@@ -58,7 +64,7 @@ struct LabTimePicker: View {
                             .padding(.horizontal, 18)
                             .padding(.vertical, 11)
                             .background(selectedIndex == index ? Color(hex: "#2196F3") : Color(hex: "#F4F6FB"))
-                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                            .clipShape(Capsule())
                     }
                     .buttonStyle(.plain)
                 }

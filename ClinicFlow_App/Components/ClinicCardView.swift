@@ -62,7 +62,11 @@ struct ClinicCardView: View {
                 
                 if let info = info {
                     HStack(spacing: 5) {
-                        Circle().fill(Color(hex: "#2a9df4")).frame(width: 7, height: 7)
+                        // Blue clock icon instead of the dot
+                        Image(systemName: "clock.fill")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color(hex: "#2a9df4"))
+                        
                         Text(info)
                             .font(.system(size: 11))
                             .foregroundColor(Color(hex: "#888888"))

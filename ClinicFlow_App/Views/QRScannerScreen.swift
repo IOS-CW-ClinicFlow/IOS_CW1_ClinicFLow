@@ -140,3 +140,5 @@ struct QRScannerScreen: View {
 #Preview {
     QRScannerScreen()
 }
+
+

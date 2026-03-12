@@ -17,9 +17,6 @@ enum LabDetailData {
         about:      "Our X-ray department provides fast and accurate imaging to help diagnose bone fractures, infections, and other conditions with minimal radiation exposure.",
         serviceFee: "Rs. 2,000",
         chips: [
-            LabChip(label: "Certified",      colorHex: "#2196F3", iconName: "checkmark"),
-            LabChip(label: "HIPAA-compliant", colorHex: "#2196F3", iconName: "shield"),
-            LabChip(label: "15-20 min",       colorHex: "#2196F3", iconName: "clock"),
             LabChip(label: "No Prep",         colorHex: "#F44336", iconName: "xmark.circle"),
             LabChip(label: "Online Results",  colorHex: "#00897B", iconName: "desktopcomputer"),
             LabChip(label: "Within 24hrs",    colorHex: "#2196F3", iconName: "clock"),
@@ -44,9 +41,6 @@ enum LabDetailData {
         about:      "Our CT scan unit delivers detailed cross-sectional images of internal organs, helping physicians detect tumours, injuries, and vascular conditions with precision.",
         serviceFee: "Rs. 4,500",
         chips: [
-            LabChip(label: "Certified",      colorHex: "#2196F3", iconName: "checkmark"),
-            LabChip(label: "HIPAA-compliant", colorHex: "#2196F3", iconName: "shield"),
-            LabChip(label: "30-45 min",       colorHex: "#2196F3", iconName: "clock"),
             LabChip(label: "Prep Required",   colorHex: "#F44336", iconName: "exclamationmark.circle"),
             LabChip(label: "Online Results",  colorHex: "#00897B", iconName: "desktopcomputer"),
             LabChip(label: "Within 48hrs",    colorHex: "#2196F3", iconName: "clock"),
@@ -71,9 +65,6 @@ enum LabDetailData {
         about:      "Our haematology lab offers a full range of blood panels — from CBC and lipid profiles to glucose and thyroid function — with rapid turnaround times.",
         serviceFee: "Rs. 1,200",
         chips: [
-            LabChip(label: "Certified",      colorHex: "#2196F3", iconName: "checkmark"),
-            LabChip(label: "HIPAA-compliant", colorHex: "#2196F3", iconName: "shield"),
-            LabChip(label: "10-15 min",       colorHex: "#2196F3", iconName: "clock"),
             LabChip(label: "Fasting Req.",    colorHex: "#F44336", iconName: "exclamationmark.circle"),
             LabChip(label: "Online Results",  colorHex: "#00897B", iconName: "desktopcomputer"),
             LabChip(label: "Within 6hrs",     colorHex: "#2196F3", iconName: "clock"),
@@ -98,9 +89,6 @@ enum LabDetailData {
         about:      "Our MRI unit uses high-field magnetic resonance imaging to produce detailed images of soft tissues, joints, and the brain — with no ionising radiation.",
         serviceFee: "Rs. 6,500",
         chips: [
-            LabChip(label: "Certified",      colorHex: "#2196F3", iconName: "checkmark"),
-            LabChip(label: "HIPAA-compliant", colorHex: "#2196F3", iconName: "shield"),
-            LabChip(label: "45-60 min",       colorHex: "#2196F3", iconName: "clock"),
             LabChip(label: "No Metal",        colorHex: "#F44336", iconName: "exclamationmark.circle"),
             LabChip(label: "Online Results",  colorHex: "#00897B", iconName: "desktopcomputer"),
             LabChip(label: "Within 24hrs",    colorHex: "#2196F3", iconName: "clock"),
@@ -125,9 +113,6 @@ enum LabDetailData {
         about:      "Our ECG unit provides fast electrocardiogram recordings to detect heart rhythm abnormalities, arrhythmias, and cardiac conditions with immediate results.",
         serviceFee: "Rs. 800",
         chips: [
-            LabChip(label: "Certified",      colorHex: "#2196F3", iconName: "checkmark"),
-            LabChip(label: "HIPAA-compliant", colorHex: "#2196F3", iconName: "shield"),
-            LabChip(label: "5-10 min",        colorHex: "#2196F3", iconName: "clock"),
             LabChip(label: "No Prep",         colorHex: "#4CAF50", iconName: "checkmark.circle"),
             LabChip(label: "Instant Results", colorHex: "#00897B", iconName: "desktopcomputer"),
             LabChip(label: "Immediate",       colorHex: "#F44336", iconName: "exclamationmark.circle"),
