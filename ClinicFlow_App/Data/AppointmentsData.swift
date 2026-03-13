@@ -17,7 +17,7 @@ struct AppointmentsData {
 
     // ── Current queue status ──────────────────────────────────────────────
     static let currentQueue = QueueInfo(
-        current:    12,
+        current:    20,
         yourNumber: 21,
         waitMin:    5
     )
