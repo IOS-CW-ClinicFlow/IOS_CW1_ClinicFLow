@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct MapPin: Identifiable {
-    let id = UUID()
-    let xRatio: CGFloat     // 0–1 relative to image width
-    let yRatio: CGFloat     // 0–1 relative to image height
+    let xRatio: CGFloat
+    let yRatio: CGFloat
     let color: Color
     let hasDot: Bool
     let pulsing: Bool
     let label: String
-    let distance: String    // e.g. "120m"
-    let time: String        // e.g. "2 min"
+    let distance: String
+    let time: String
+    let mapPinId: String       
+    var id: String { mapPinId }
 }

@@ -116,18 +116,41 @@ private struct SignupContent: View {
 
     private func validateFields() -> Bool {
         var valid = true
-        if fullName.trimmingCharacters(in: .whitespaces).isEmpty {
+
+        // Full name — required, no digits, at least 2 words
+        let nameTrimmed = fullName.trimmingCharacters(in: .whitespaces)
+        if nameTrimmed.isEmpty {
             fullNameError = "Name cannot be empty"; valid = false
-        } else { fullNameError = nil }
+        } else if nameTrimmed.rangeOfCharacter(from: .decimalDigits) != nil {
+            fullNameError = "Name cannot contain numbers"; valid = false
+        } else if nameTrimmed.split(separator: " ").count < 2 {
+            fullNameError = "Please enter your full name"; valid = false
+        } else {
+            fullNameError = nil
+        }
+
+        // Email
         if !email.contains("@") || !email.contains(".") {
             emailError = "Invalid email address"; valid = false
-        } else { emailError = nil }
-        let digits = phone.filter { $0.isNumber }
-        if digits.isEmpty {
+        } else {
+            emailError = nil
+        }
+
+        // Phone — exactly 9 digits, no letters
+        let digits = phone.filter(\.isNumber)
+        let hasLetters = phone.contains(where: { $0.isLetter })
+        if phone.trimmingCharacters(in: .whitespaces).isEmpty {
             phoneError = "Please enter a phone number"; valid = false
-        } else if digits.count < 6 {
-            phoneError = "Phone number is too short"; valid = false
-        } else { phoneError = nil }
+        } else if hasLetters {
+            phoneError = "Phone number cannot contain letters"; valid = false
+        } else if digits.count < 9 {
+            phoneError = "Mobile number must be exactly 9 digits"; valid = false
+        } else if digits.count > 9 {
+            phoneError = "Mobile number must not exceed 9 digits"; valid = false
+        } else {
+            phoneError = nil
+        }
+
         return valid
     }
 

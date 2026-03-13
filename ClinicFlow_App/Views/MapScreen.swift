@@ -25,7 +25,8 @@ private struct CorridorPath: Shape {
 struct MapScreen: View {
 
     var onBack: () -> Void = {}
-
+    var initialSelectedPin: String? = nil
+    
     @State private var selectedPin:      MapPin? = nil
     @State private var searchText:       String  = ""
     @State private var showDropdown:     Bool    = false
@@ -140,6 +141,13 @@ struct MapScreen: View {
             }
         }
         .background(Color(hex: "#F4F6FB"))
+        .onAppear {
+            if let slug = initialSelectedPin,
+               let pin = MapData.pins.first(where: { $0.id == slug }) {
+                selectedPin = pin
+                searchText  = pin.label
+            }
+        }
     }
 
     // ── Search bar ─────────────────────────────────────────────────────────

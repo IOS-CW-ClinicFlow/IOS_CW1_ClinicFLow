@@ -18,6 +18,7 @@ enum Gender: String, CaseIterable {
 }
 
 enum Relationship: String, CaseIterable {
+    case unselected = "Select relationship" 
     case mother  = "Mother"
     case father  = "Father"
     case spouse  = "Spouse"
@@ -31,7 +32,7 @@ struct PatientForm {
     var fullName:     String       = ""
     var mobile:       String       = ""
     var gender:       Gender       = .male
-    var age:          String       = ""   // free text, validated as numeric 1–120
-    var relationship: Relationship = .mother
+    var age:          String       = ""
+    var relationship: Relationship = .unselected
     var problem:      String       = ""
 }
