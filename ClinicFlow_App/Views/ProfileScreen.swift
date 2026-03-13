@@ -246,9 +246,9 @@ private struct FavouritesSheet: View {
     @Environment(\.dismiss) private var dismiss
 
     private let favourites: [(String, String, String)] = [
-        ("Dr. Jayaani Dennis",  "Physiologist",  "doc_jayaani"),
-        ("Dr. Ryan De Silva",   "Cardiologist",  "doc_ryan"),
-        ("Dr. Sarath Fernando", "Dentist",        "doc_sarath"),
+        ("Dr. Jayaani Dennis",  "Physiologist",  "doc3"),
+        ("Dr. Ryan De Silva",   "Cardiologist",  "doc5"),
+        ("Dr. Sarath Fernando", "Dentist",        "doc7"),
     ]
 
     var body: some View {
